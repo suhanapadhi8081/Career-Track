@@ -9,7 +9,7 @@
 - **Client-Side Persistence:** Instant data sync via browser `localStorage`.
 - **Search & Filtering:** Real-time live filtering by company or target role.
 
-## 🛠️ Built With
+##  Built With
 - **Frontend:** HTML5, CSS3 (Modern Deep Navy Theme), Vanilla JavaScript
 - **Typography:** Plus Jakarta Sans & JetBrains Mono
 
