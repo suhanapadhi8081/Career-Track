@@ -10,7 +10,7 @@
 - **Search & Filtering:** Real-time live filtering by company or target role.
 
 ##  Built With
-- **Frontend:** HTML5, CSS3 (Modern Deep Navy Theme), Vanilla JavaScript
+- **Frontend:** HTML5, CSS3, JavaScript
 - **Typography:** Plus Jakarta Sans & JetBrains Mono
 
  👉🏻**[Click Here to View Live Demo](https://suhanapadhi8081.github.io/Career-Track/)**
