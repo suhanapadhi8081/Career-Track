@@ -20,7 +20,6 @@
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             --cyan: #38bdf8;
-            --cyan-bright: #5ce1e6;
             --cyan-dark: #031525;
             --green: #34d399;
             --amber: #fbbf24;
@@ -78,9 +77,7 @@
             display: grid;
             place-items: center;
             font-weight: 800;
-            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.92rem;
-            letter-spacing: -0.02em;
         }
         
         .brand-text {
@@ -145,7 +142,6 @@
             background: var(--bg-surface-hover);
             color: var(--text-primary);
         }
-        /* Main Container */
         
         main {
             max-width: 1320px;
@@ -350,7 +346,6 @@
         .metric-value {
             font-size: 2rem;
             font-weight: 800;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         
         .val-white {
@@ -378,7 +373,7 @@
         
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 2.15fr 1fr;
+            grid-template-columns: 2.1fr 1.05fr;
             gap: 1.5rem;
             align-items: start;
         }
@@ -410,7 +405,6 @@
             color: var(--text-secondary);
             font-family: 'JetBrains Mono', monospace;
         }
-        /* View Toggle */
         
         .view-toggle {
             display: inline-flex;
@@ -435,7 +429,6 @@
             background: var(--cyan);
             color: var(--cyan-dark);
         }
-        /* Search & Filter Bar */
         
         .controls-bar {
             padding: 0 1.5rem 1.15rem;
@@ -678,33 +671,61 @@
             padding-top: 0.5rem;
             border-top: 1px solid rgba(56, 189, 248, 0.08);
         }
-        /* Tech Stack Readiness */
+        /* Auto-Calculated Milestone Tech Stack Readiness */
         
         .skills-body {
             padding: 0 1.5rem 1.5rem;
         }
         
-        .skill-item {
-            margin-bottom: 1.1rem;
+        .skills-hint {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .skill-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.85rem;
+            transition: border-color 0.15s;
+        }
+        
+        .skill-card:hover {
+            border-color: var(--border-strong);
         }
         
         .skill-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.4rem;
+            cursor: pointer;
+            gap: 0.5rem;
         }
         
-        .skill-name {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-primary);
-        }
-        
-        .skill-controls {
+        .skill-title-wrap {
             display: flex;
             align-items: center;
             gap: 0.45rem;
+        }
+        
+        .skill-chevron {
+            font-size: 0.75rem;
+            color: var(--cyan);
+            transition: transform 0.15s;
+        }
+        
+        .skill-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--text-primary);
+        }
+        
+        .skill-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .skill-pct {
@@ -714,30 +735,117 @@
             color: var(--cyan);
         }
         
+        .skill-pct.complete {
+            color: var(--green);
+        }
+        
         .skill-remove {
             background: none;
             border: none;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1;
         }
         
         .skill-remove:hover {
             color: var(--red);
         }
         
-        input[type="range"] {
+        .progress-track {
             width: 100%;
-            accent-color: var(--cyan);
-            cursor: pointer;
             height: 6px;
-            background: var(--bg-input);
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-top: 0.55rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            border-radius: 999px;
+            transition: width 0.25s ease;
+        }
+        
+        .progress-fill.complete {
+            background: linear-gradient(90deg, #059669, #34d399);
+        }
+        
+        .milestones-drawer {
+            margin-top: 0.85rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            display: none;
+        }
+        
+        .milestones-drawer.open {
+            display: block;
+        }
+        
+        .milestone-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding: 0.35rem 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .milestone-label {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .milestone-label input[type="checkbox"] {
+            accent-color: var(--cyan);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+        
+        .milestone-label.done {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+        
+        .milestone-del {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .milestone-del:hover {
+            color: var(--red);
+        }
+        
+        .add-milestone-row {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
+        }
+        
+        .add-milestone-row input {
+            flex: 1;
+            padding: 0.38rem 0.65rem;
+            font-size: 0.78rem;
+        }
+        
+        .add-milestone-row button {
+            padding: 0.38rem 0.65rem;
+            font-size: 0.75rem;
         }
         
         .add-skill-box {
             display: flex;
             gap: 0.5rem;
-            margin-top: 1.15rem;
+            margin-top: 1rem;
             padding-top: 1rem;
             border-top: 1px solid var(--border-subtle);
         }
@@ -893,7 +1001,7 @@
         <!-- Hero Banner -->
         <section class="hero-banner">
             <h2>Career Pipeline Dashboard</h2>
-            <p>Organize your job search, track interview stages, get automated interview countdown alerts, and measure preparation metrics all in one place.</p>
+            <p>Organize your job search, track interview stages, get automated interview countdown alerts, and measure preparation milestones all in one place.</p>
         </section>
 
         <!-- Interview-Only Smart 4-Stage Reminders Panel -->
@@ -983,16 +1091,17 @@
                 <div class="kanban-board" id="kanbanViewContainer"></div>
             </div>
 
-            <!-- Interactive Tech Stack Readiness Card -->
+            <!-- Smart Milestone Tech Stack Readiness Card -->
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Tech Stack Readiness</h2>
                 </div>
                 <div class="skills-body">
+                    <p class="skills-hint">Click any skill to tick off preparation milestones — readiness updates automatically.</p>
                     <div id="skillsList"></div>
 
                     <form class="add-skill-box" onsubmit="addSkill(event)">
-                        <input type="text" id="newSkillName" placeholder="Add skill (e.g. Docker, React)..." required />
+                        <input type="text" id="newSkillName" placeholder="Add new skill (e.g. Docker, React)..." required />
                         <button type="submit" class="btn btn-cyan" style="padding: 0.5rem 0.85rem;">+ Add</button>
                     </form>
                 </div>
@@ -1057,8 +1166,8 @@
     </div>
 
     <script>
-        const STORAGE_APPS_KEY = 'careertrack_dark_apps_v3';
-        const STORAGE_SKILLS_KEY = 'careertrack_dark_skills_v3';
+        const STORAGE_APPS_KEY = 'careertrack_final_apps_v4';
+        const STORAGE_SKILLS_KEY = 'careertrack_final_skills_v4';
 
         function getOffsetDate(days) {
             const d = new Date();
@@ -1107,24 +1216,88 @@
 
         const defaultSkills = [{
             id: 101,
-            name: 'Python',
-            level: 90
+            name: 'Python & Core Programming',
+            expanded: true,
+            milestones: [{
+                id: 1,
+                text: 'OOPs, Decorators & File Handling',
+                done: true
+            }, {
+                id: 2,
+                text: 'Built 2+ Python/Flask Projects',
+                done: true
+            }, {
+                id: 3,
+                text: 'Solved 30+ Coding Problems',
+                done: true
+            }, {
+                id: 4,
+                text: 'Mock Technical Interview Revision',
+                done: false
+            }]
         }, {
             id: 102,
-            name: 'Flask / REST APIs',
-            level: 80
+            name: 'Data Structures & Algorithms',
+            expanded: false,
+            milestones: [{
+                id: 1,
+                text: 'Arrays, Strings & Hashing',
+                done: true
+            }, {
+                id: 2,
+                text: 'Linked Lists, Stacks & Queues',
+                done: true
+            }, {
+                id: 3,
+                text: 'Trees, Graphs & Recursion',
+                done: false
+            }, {
+                id: 4,
+                text: 'Dynamic Programming & Timed Tests',
+                done: false
+            }]
         }, {
             id: 103,
-            name: 'SQL / Database Design',
-            level: 75
+            name: 'Machine Learning & AI',
+            expanded: false,
+            milestones: [{
+                id: 1,
+                text: 'NumPy, Pandas & Data Preprocessing',
+                done: true
+            }, {
+                id: 2,
+                text: 'Supervised & Unsupervised Models',
+                done: true
+            }, {
+                id: 3,
+                text: 'Neural Networks & Model Evaluation',
+                done: false
+            }, {
+                id: 4,
+                text: 'End-to-End AI Capstone Project',
+                done: false
+            }]
         }, {
             id: 104,
-            name: 'Data Structures & Algorithms',
-            level: 70
-        }, {
-            id: 105,
-            name: 'Machine Learning & AI',
-            level: 65
+            name: 'SQL & Web Backend (Flask)',
+            expanded: false,
+            milestones: [{
+                id: 1,
+                text: 'SQL Joins, Indexing & Queries',
+                done: true
+            }, {
+                id: 2,
+                text: 'REST API Design & Routing',
+                done: true
+            }, {
+                id: 3,
+                text: 'Authentication & Deployment',
+                done: true
+            }, {
+                id: 4,
+                text: 'System Design Basics',
+                done: false
+            }]
         }];
 
         let applications = JSON.parse(localStorage.getItem(STORAGE_APPS_KEY)) || defaultApps;
@@ -1133,6 +1306,12 @@
         function persistData() {
             localStorage.setItem(STORAGE_APPS_KEY, JSON.stringify(applications));
             localStorage.setItem(STORAGE_SKILLS_KEY, JSON.stringify(skills));
+        }
+
+        function getSkillPercent(skill) {
+            if (!skill.milestones || skill.milestones.length === 0) return 0;
+            const doneCount = skill.milestones.filter(m => m.done).length;
+            return Math.round((doneCount / skill.milestones.length) * 100);
         }
 
         // Smart Reminders ONLY for 'Interviewing' stage
@@ -1206,7 +1385,7 @@
             const offers = applications.filter(a => a.status === 'Offer').length;
 
             const avgSkill = skills.length ?
-                Math.round(skills.reduce((acc, s) => acc + Number(s.level), 0) / skills.length) :
+                Math.round(skills.reduce((acc, s) => acc + getSkillPercent(s), 0) / skills.length) :
                 0;
 
             document.getElementById('statTotal').textContent = total;
@@ -1230,7 +1409,6 @@
             });
         }
 
-        // Countdown badge shows ONLY when status is 'Interviewing'
         function getDateBadgeHtml(app) {
             if (!app.reminderDate) return `<span class="date-tag">&mdash;</span>`;
             let badge = '';
@@ -1329,6 +1507,7 @@
       }
     }
 
+    // Render Interactive Milestone-Driven Tech Stack Readiness
     function renderSkills() {
       const list = document.getElementById('skillsList');
       if (skills.length === 0) {
@@ -1336,32 +1515,93 @@
         return;
       }
 
-      list.innerHTML = skills.map(skill => `
-        <div class="skill-item">
-          <div class="skill-top">
-            <span class="skill-name">${escapeHtml(skill.name)}</span>
-            <div class="skill-controls">
-              <span class="skill-pct" id="pct-${skill.id}">${skill.level}%</span>
-              <button class="skill-remove" onclick="removeSkill(${skill.id})" title="Remove">&times;</button>
+      list.innerHTML = skills.map(skill => {
+        const pct = getSkillPercent(skill);
+        const isComplete = pct === 100;
+        const doneCount = skill.milestones.filter(m => m.done).length;
+
+        return `
+          <div class="skill-card">
+            <div class="skill-top" onclick="toggleSkillDrawer(${skill.id})">
+              <div class="skill-title-wrap">
+                <span class="skill-chevron">${skill.expanded ? '▾' : '▸'}</span>
+                <span class="skill-name">${escapeHtml(skill.name)}</span>
+              </div>
+              <div class="skill-meta">
+                <span style="font-size:0.7rem; color:var(--text-muted);">${doneCount}/${skill.milestones.length}</span>
+                <span class="skill-pct ${isComplete ? 'complete' : ''}">${pct}%</span>
+                <button class="skill-remove" onclick="event.stopPropagation(); removeSkill(${skill.id})" title="Remove Skill">&times;</button>
+              </div>
+            </div>
+
+            <div class="progress-track">
+              <div class="progress-fill ${isComplete ? 'complete' : ''}" style="width: ${pct}%;"></div>
+            </div>
+
+            <div class="milestones-drawer ${skill.expanded ? 'open' : ''}">
+              ${skill.milestones.map(m => `
+                <div class="milestone-row">
+                  <label class="milestone-label ${m.done ? 'done' : ''}">
+                    <input type="checkbox" ${m.done ? 'checked' : ''} onchange="toggleMilestone(${skill.id}, ${m.id})" />
+                    <span>${escapeHtml(m.text)}</span>
+                  </label>
+                  <button class="milestone-del" onclick="deleteMilestone(${skill.id}, ${m.id})" title="Remove checkpoint">&times;</button>
+                </div>
+              `).join('')}
+
+              <form class="add-milestone-row" onsubmit="addMilestone(event, ${skill.id})">
+                <input type="text" id="ms-input-${skill.id}" placeholder="Add checkpoint..." required />
+                <button type="submit" class="btn btn-outline">+ Step</button>
+              </form>
             </div>
           </div>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value="${skill.level}"
-            oninput="updateSkillLevel(${skill.id}, this.value)"
-          />
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
-    function updateSkillLevel(id, value) {
-      const skill = skills.find(s => s.id === id);
+    function toggleSkillDrawer(skillId) {
+      const skill = skills.find(s => s.id === skillId);
       if (skill) {
-        skill.level = Number(value);
-        document.getElementById(`pct-${id}`).textContent = `${value}%`;
+        skill.expanded = !skill.expanded;
         persistData();
+        renderSkills();
+      }
+    }
+
+    function toggleMilestone(skillId, milestoneId) {
+      const skill = skills.find(s => s.id === skillId);
+      if (!skill) return;
+      const ms = skill.milestones.find(m => m.id === milestoneId);
+      if (ms) {
+        ms.done = !ms.done;
+        persistData();
+        renderSkills();
+        renderMetrics();
+      }
+    }
+
+    function addMilestone(e, skillId) {
+      e.preventDefault();
+      const input = document.getElementById(`ms-input-${skillId}`);
+      const text = input.value.trim();
+      if (!text) return;
+
+      const skill = skills.find(s => s.id === skillId);
+      if (skill) {
+        skill.milestones.push({ id: Date.now(), text, done: false });
+        skill.expanded = true;
+        persistData();
+        renderSkills();
+        renderMetrics();
+      }
+    }
+
+    function deleteMilestone(skillId, milestoneId) {
+      const skill = skills.find(s => s.id === skillId);
+      if (skill) {
+        skill.milestones = skill.milestones.filter(m => m.id !== milestoneId);
+        persistData();
+        renderSkills();
         renderMetrics();
       }
     }
@@ -1375,7 +1615,13 @@
       skills.push({
         id: Date.now(),
         name,
-        level: 50
+        expanded: true,
+        milestones: [
+          { id: Date.now() + 1, text: 'Core Concepts & Fundamentals', done: false },
+          { id: Date.now() + 2, text: 'Hands-on Practice / Exercises', done: false },
+          { id: Date.now() + 3, text: 'Mini Project Implementation', done: false },
+          { id: Date.now() + 4, text: 'Interview Questions Revision', done: false }
+        ]
       });
       input.value = '';
       persistData();
