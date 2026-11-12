@@ -2,7 +2,7 @@
 
 > A modern, high-performance career application pipeline and readiness dashboard designed to track job applications, interviews, and core technical preparation metrics.
 
-## 🌟 Key Features
+##  Key Features
 - **Application Pipeline:** Real-time tracking of job stages (Wishlist, Applied, Interviewing, Offer, Rejected).
 - **Metric Analytics:** Automatic yield computation (Total, Active, Interviews, Offers).
 - **Skill Benchmark:** Interactive visualization of core engineering stack readiness.
@@ -13,4 +13,4 @@
 - **Frontend:** HTML5, CSS3 (Modern Deep Navy Theme), Vanilla JavaScript
 - **Typography:** Plus Jakarta Sans & JetBrains Mono
 
-👉 **[Click Here to View Live Demo](https://suhanapadhi8081.github.io/Career-Track/)**
+ **[Click Here to View Live Demo](https://suhanapadhi8081.github.io/Career-Track/)**
