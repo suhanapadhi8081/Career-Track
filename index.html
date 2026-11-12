@@ -1513,3 +1513,1519 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerTrack | Professional Career Pipeline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --bg-base: #060e1a;
+            --bg-surface: #0c192c;
+            --bg-surface-hover: #12233d;
+            --bg-input: #081222;
+            --border-subtle: rgba(56, 189, 248, 0.14);
+            --border-strong: rgba(56, 189, 248, 0.32);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --cyan: #38bdf8;
+            --cyan-bright: #5ce1e6;
+            --cyan-dark: #031525;
+            --green: #34d399;
+            --amber: #fbbf24;
+            --orange: #fb923c;
+            --red: #f87171;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Top Navbar */
+        
+        header {
+            background-color: rgba(6, 14, 26, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 0.95rem 2.25rem;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+        
+        .nav-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .brand-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            color: #041322;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.92rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .brand-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+        
+        .brand-text span {
+            color: var(--cyan);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        
+        .btn {
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.58rem 1.15rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.16s ease;
+        }
+        
+        .btn-cyan {
+            background-color: var(--cyan);
+            color: var(--cyan-dark);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+        }
+        
+        .btn-cyan:hover {
+            background-color: #7dd3fc;
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--cyan);
+            border: 1px solid var(--border-strong);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(56, 189, 248, 0.16);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .btn-ghost:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+        }
+        /* Main Container */
+        
+        main {
+            max-width: 1320px;
+            margin: 1.75rem auto;
+            padding: 0 2.25rem 3.5rem;
+        }
+        /* Hero Banner */
+        
+        .hero-banner {
+            background: linear-gradient(135deg, #0b1c36 0%, #102a4c 55%, #0c213e 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem 2.25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+        
+        .hero-banner h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+        
+        .hero-banner p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            max-width: 640px;
+        }
+        /* Interview-Only Smart 4-Stage Reminders Strip */
+        
+        .reminders-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--amber);
+            border-radius: 14px;
+            padding: 1rem 1.35rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        
+        .reminders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .reminders-title {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .reminder-legend {
+            display: flex;
+            gap: 0.85rem;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+        }
+        
+        .reminder-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+        
+        .reminder-pill {
+            font-size: 0.78rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: transform 0.12s ease;
+        }
+        
+        .reminder-pill:hover {
+            transform: translateY(-1px);
+        }
+        
+        .reminder-overdue {
+            background: rgba(248, 113, 113, 0.14);
+            color: #fca5a5;
+            border: 1px solid rgba(248, 113, 113, 0.4);
+        }
+        
+        .reminder-today {
+            background: rgba(251, 146, 60, 0.15);
+            color: #fdba74;
+            border: 1px solid rgba(251, 146, 60, 0.45);
+        }
+        
+        .reminder-tomorrow {
+            background: rgba(251, 191, 36, 0.14);
+            color: #fde047;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+        
+        .reminder-3days {
+            background: rgba(56, 189, 248, 0.14);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        
+        .reminder-empty {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+        /* Floating Toast Notification */
+        
+        .toast-alert {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: #0d1f38;
+            color: var(--text-primary);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-strong);
+            border-left: 4px solid var(--amber);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+            max-width: 360px;
+            z-index: 60;
+            display: none;
+            animation: slideUp 0.25s ease;
+        }
+        
+        .toast-alert.show {
+            display: block;
+        }
+        
+        .toast-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.35rem;
+            font-weight: 700;
+            font-size: 0.86rem;
+            color: var(--amber);
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            cursor: pointer;
+        }
+        
+        .toast-body {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            line-height: 1.45;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        /* 4 KPI Cards */
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.15rem;
+            margin-bottom: 1.75rem;
+        }
+        
+        .metric-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 1.35rem 1.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .val-white {
+            color: var(--text-primary);
+        }
+        
+        .val-cyan {
+            color: var(--cyan);
+        }
+        
+        .val-amber {
+            color: var(--amber);
+        }
+        
+        .val-green {
+            color: var(--green);
+        }
+        
+        .metric-sub {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        /* Main Split Layout */
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2.15fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .record-count {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* View Toggle */
+        
+        .view-toggle {
+            display: inline-flex;
+            background: var(--bg-input);
+            padding: 3px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .view-btn {
+            border: none;
+            background: transparent;
+            padding: 0.38rem 0.78rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        
+        .view-btn.active {
+            background: var(--cyan);
+            color: var(--cyan-dark);
+        }
+        /* Search & Filter Bar */
+        
+        .controls-bar {
+            padding: 0 1.5rem 1.15rem;
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            font-family: inherit;
+            font-size: 0.85rem;
+            padding: 0.6rem 0.9rem;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--cyan);
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        /* Table View */
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        
+        th {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            padding: 0.8rem 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+            font-size: 0.86rem;
+            vertical-align: middle;
+        }
+        
+        tr:hover td {
+            background-color: var(--bg-surface-hover);
+        }
+        
+        .company-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            display: block;
+        }
+        
+        .note-preview {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .role-text {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.24rem 0.68rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
+        .status-Wishlist {
+            background: rgba(148, 163, 184, 0.14);
+            color: #cbd5e1;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+        
+        .status-Applied {
+            background: rgba(56, 189, 248, 0.14);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        
+        .status-Interviewing {
+            background: rgba(251, 191, 36, 0.14);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.32);
+        }
+        
+        .status-Offer {
+            background: rgba(52, 211, 153, 0.14);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.32);
+        }
+        
+        .status-Rejected {
+            background: rgba(248, 113, 113, 0.14);
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+        }
+        
+        .date-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            display: block;
+        }
+        
+        .date-sub-badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 3px;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+        
+        .action-btns {
+            display: flex;
+            gap: 0.45rem;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            padding: 0.32rem 0.55rem;
+            cursor: pointer;
+            font-size: 0.76rem;
+            color: var(--cyan);
+            transition: all 0.15s;
+        }
+        
+        .icon-btn:hover {
+            background: var(--cyan);
+            color: var(--cyan-dark);
+        }
+        
+        .icon-btn.delete {
+            color: var(--red);
+            border-color: rgba(248, 113, 113, 0.25);
+            background: rgba(248, 113, 113, 0.08);
+        }
+        
+        .icon-btn.delete:hover {
+            background: var(--red);
+            color: #060e1a;
+        }
+        /* Kanban View */
+        
+        .kanban-board {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.85rem;
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .kanban-board.active {
+            display: grid;
+        }
+        
+        .kanban-col {
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 0.75rem;
+            min-height: 280px;
+        }
+        
+        .kanban-col-header {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--cyan);
+            padding-bottom: 0.55rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .kanban-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.65rem;
+        }
+        
+        .kanban-card-title {
+            font-weight: 700;
+            font-size: 0.86rem;
+            color: var(--text-primary);
+        }
+        
+        .kanban-card-role {
+            font-size: 0.76rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.45rem;
+        }
+        
+        .kanban-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.55rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(56, 189, 248, 0.08);
+        }
+        /* Tech Stack Readiness */
+        
+        .skills-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .skill-item {
+            margin-bottom: 1.1rem;
+        }
+        
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        
+        .skill-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+        
+        .skill-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+        
+        .skill-remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .skill-remove:hover {
+            color: var(--red);
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--cyan);
+            cursor: pointer;
+            height: 6px;
+            background: var(--bg-input);
+        }
+        
+        .add-skill-box {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.15rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .add-skill-box input {
+            flex: 1;
+            min-width: 0;
+        }
+        /* Modal */
+        
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 8, 16, 0.78);
+            backdrop-filter: blur(4px);
+            display: none;
+            place-items: center;
+            z-index: 50;
+            padding: 1rem;
+        }
+        
+        .modal-backdrop.open {
+            display: grid;
+        }
+        
+        .modal {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-strong);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65);
+        }
+        
+        .modal-header {
+            background: #091426;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1.15rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.35rem;
+            cursor: pointer;
+        }
+        
+        .close-modal:hover {
+            color: var(--cyan);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        
+        .form-group label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+        
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            background: #091426;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.65rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+        
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 960px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .kanban-board.active {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header,
+            main {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .kanban-board.active {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-icon">CT</div>
+                <div class="brand-text">Career<span>Track</span></div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline" onclick="exportToCSV()">Export CSV</button>
+                <button class="btn btn-cyan" onclick="openModal()">+ Add Opportunity</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <h2>Career Pipeline Dashboard</h2>
+            <p>Organize your job search, track interview stages, get automated interview countdown alerts, and measure preparation metrics all in one place.</p>
+        </section>
+
+        <!-- Interview-Only Smart 4-Stage Reminders Panel -->
+        <section class="reminders-panel" id="remindersPanel">
+            <div class="reminders-header">
+                <div class="reminders-title">
+                    <span>⏰ Interview Reminders (3 Days Before &bull; 1 Day Before &bull; Today &bull; Overdue)</span>
+                </div>
+                <div class="reminder-legend">
+                    <span>🔴 Overdue</span>
+                    <span>🟠 Today</span>
+                    <span>🟡 1 Day Left</span>
+                    <span>🔵 2–3 Days Left</span>
+                </div>
+            </div>
+            <div class="reminder-pills" id="reminderPills"></div>
+        </section>
+
+        <!-- 4 KPI Cards -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Total Pipeline</div>
+                <div class="metric-value val-white" id="statTotal">0</div>
+                <div class="metric-sub">All tracked opportunities</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Active Applications</div>
+                <div class="metric-value val-cyan" id="statActive">0</div>
+                <div class="metric-sub">Applied &amp; interviewing</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">In Interview</div>
+                <div class="metric-value val-amber" id="statInterviews">0</div>
+                <div class="metric-sub">Scheduled rounds</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Offers Received</div>
+                <div class="metric-value val-green" id="statOffers">0</div>
+                <div class="metric-sub" id="statReadinessAvg">Avg Skill Readiness: 0%</div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Application Stream Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div style="display:flex; align-items:center; gap:0.75rem;">
+                        <h2 class="card-title">Application Stream</h2>
+                        <span class="record-count" id="recordCountLabel">0 records</span>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="btnTableView" onclick="switchView('table')">Table View</button>
+                        <button class="view-btn" id="btnKanbanView" onclick="switchView('kanban')">Kanban Board</button>
+                    </div>
+                </div>
+
+                <div class="controls-bar">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Filter by company, position, or role..." oninput="renderAll()" />
+                    <select id="statusFilter" onchange="renderAll()">
+            <option value="All">All Stages</option>
+            <option value="Wishlist">Wishlist</option>
+            <option value="Applied">Applied</option>
+            <option value="Interviewing">Interviewing</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+                </div>
+
+                <!-- Table View -->
+                <div class="table-wrapper" id="tableViewContainer">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Position</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Kanban Board View -->
+                <div class="kanban-board" id="kanbanViewContainer"></div>
+            </div>
+
+            <!-- Interactive Tech Stack Readiness Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Tech Stack Readiness</h2>
+                </div>
+                <div class="skills-body">
+                    <div id="skillsList"></div>
+
+                    <form class="add-skill-box" onsubmit="addSkill(event)">
+                        <input type="text" id="newSkillName" placeholder="Add skill (e.g. Docker, React)..." required />
+                        <button type="submit" class="btn btn-cyan" style="padding: 0.5rem 0.85rem;">+ Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Alert Toast (Interview Only) -->
+    <div class="toast-alert" id="toastAlert">
+        <div class="toast-top">
+            <span id="toastTitle">⏰ Interview Reminder</span>
+            <button class="toast-close" onclick="closeToast()">&times;</button>
+        </div>
+        <div class="toast-body" id="toastBody"></div>
+    </div>
+
+    <!-- Add / Edit Opportunity Modal -->
+    <div class="modal-backdrop" id="opportunityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Opportunity</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="opportunityForm" onsubmit="saveOpportunity(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="editId" />
+                    <div class="form-group">
+                        <label for="companyInput">Company / Organization *</label>
+                        <input type="text" id="companyInput" placeholder="e.g. Google, NRW INDIA, Microsoft" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="roleInput">Position / Target Role *</label>
+                        <input type="text" id="roleInput" placeholder="e.g. PYTHON DEVELOPER, AI Software Intern" required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="statusInput">Status</label>
+                            <select id="statusInput">
+                <option value="Wishlist">Wishlist</option>
+                <option value="Applied">Applied</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminderDateInput">Date (Interview Date if Interviewing)</label>
+                            <input type="date" id="reminderDateInput" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notesInput">Preparation Notes / Action Item</label>
+                        <textarea id="notesInput" rows="3" placeholder="e.g. Revise Flask REST APIs & DSA before interview..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-cyan" id="saveBtn">Save Opportunity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_APPS_KEY = 'careertrack_dark_apps_v3';
+        const STORAGE_SKILLS_KEY = 'careertrack_dark_skills_v3';
+
+        function getOffsetDate(days) {
+            const d = new Date();
+            d.setDate(d.getDate() + days);
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function getTodayLocalStr() {
+            return getOffsetDate(0);
+        }
+
+        function getDayDiff(dateStr) {
+            if (!dateStr) return null;
+            const [y1, m1, d1] = getTodayLocalStr().split('-').map(Number);
+            const [y2, m2, d2] = dateStr.split('-').map(Number);
+            const todayUtc = Date.UTC(y1, m1 - 1, d1);
+            const targetUtc = Date.UTC(y2, m2 - 1, d2);
+            return Math.round((targetUtc - todayUtc) / (1000 * 60 * 60 * 24));
+        }
+
+        const defaultApps = [{
+            id: 1,
+            company: 'NRW INDIA',
+            role: 'PYTHON DEVELOPER',
+            status: 'Offer',
+            reminderDate: getOffsetDate(-1),
+            notes: 'Offer letter received and under review.'
+        }, {
+            id: 2,
+            company: 'Google',
+            role: 'AI Software Intern',
+            status: 'Interviewing',
+            reminderDate: getOffsetDate(1),
+            notes: 'Final DSA & ML fundamentals revision before technical round.'
+        }, {
+            id: 3,
+            company: 'Microsoft',
+            role: 'Explore SWE Intern',
+            status: 'Applied',
+            reminderDate: getOffsetDate(0),
+            notes: 'Application submitted via careers portal.'
+        }];
+
+        const defaultSkills = [{
+            id: 101,
+            name: 'Python',
+            level: 90
+        }, {
+            id: 102,
+            name: 'Flask / REST APIs',
+            level: 80
+        }, {
+            id: 103,
+            name: 'SQL / Database Design',
+            level: 75
+        }, {
+            id: 104,
+            name: 'Data Structures & Algorithms',
+            level: 70
+        }, {
+            id: 105,
+            name: 'Machine Learning & AI',
+            level: 65
+        }];
+
+        let applications = JSON.parse(localStorage.getItem(STORAGE_APPS_KEY)) || defaultApps;
+        let skills = JSON.parse(localStorage.getItem(STORAGE_SKILLS_KEY)) || defaultSkills;
+
+        function persistData() {
+            localStorage.setItem(STORAGE_APPS_KEY, JSON.stringify(applications));
+            localStorage.setItem(STORAGE_SKILLS_KEY, JSON.stringify(skills));
+        }
+
+        // Smart Reminders ONLY for 'Interviewing' stage
+        function renderReminders(triggerToast = false) {
+            const container = document.getElementById('reminderPills');
+
+            const interviewReminders = applications
+                .filter(app => app.status === 'Interviewing' && app.reminderDate)
+                .map(app => ({...app,
+                    diffDays: getDayDiff(app.reminderDate)
+                }))
+                .filter(app => app.diffDays !== null && app.diffDays <= 3)
+                .sort((a, b) => a.diffDays - b.diffDays);
+
+            if (interviewReminders.length === 0) {
+                container.innerHTML = `<span class="reminder-empty">No interviews scheduled within the next 3 days. Set status to <strong>Interviewing</strong> with an interview date to activate countdown alerts.</span>`;
+                return;
+            }
+
+            container.innerHTML = interviewReminders.map(item => {
+                let cls = 'reminder-3days';
+                let icon = '🔵';
+                let label = `${item.diffDays} Days Left`;
+
+                if (item.diffDays < 0) {
+                    cls = 'reminder-overdue';
+                    icon = '🔴';
+                    label = `Overdue (${Math.abs(item.diffDays)}d ago)`;
+                } else if (item.diffDays === 0) {
+                    cls = 'reminder-today';
+                    icon = '🟠';
+                    label = 'TODAY (Interview Day)';
+                } else if (item.diffDays === 1) {
+                    cls = 'reminder-tomorrow';
+                    icon = '🟡';
+                    label = '1 DAY BEFORE (Tomorrow)';
+                } else if (item.diffDays === 3) {
+                    cls = 'reminder-3days';
+                    icon = '🔵';
+                    label = '3 DAYS BEFORE';
+                }
+
+                return `
+          <span class="reminder-pill ${cls}" onclick="openModal(${item.id})" title="Click to view or edit interview">
+            ${icon} <strong>${escapeHtml(item.company)}</strong> (${escapeHtml(item.role)}) &mdash; ${label}
+          </span>
+        `;
+            }).join('');
+
+            if (triggerToast) {
+                const urgent = interviewReminders.filter(r => r.diffDays <= 1);
+                if (urgent.length > 0) {
+                    const lines = urgent.map(u => {
+                        const tag = u.diffDays < 0 ? 'Overdue' : (u.diffDays === 0 ? 'Today' : 'Tomorrow (1 Day Left)');
+                        return `&bull; <strong>${escapeHtml(u.company)}</strong> Interview (${tag})`;
+                    }).join('<br>');
+                    document.getElementById('toastBody').innerHTML = lines;
+                    document.getElementById('toastAlert').classList.add('show');
+                }
+            }
+        }
+
+        function closeToast() {
+            document.getElementById('toastAlert').classList.remove('show');
+        }
+
+        function renderMetrics() {
+            const total = applications.length;
+            const active = applications.filter(a => a.status === 'Applied' || a.status === 'Interviewing').length;
+            const interviews = applications.filter(a => a.status === 'Interviewing').length;
+            const offers = applications.filter(a => a.status === 'Offer').length;
+
+            const avgSkill = skills.length ?
+                Math.round(skills.reduce((acc, s) => acc + Number(s.level), 0) / skills.length) :
+                0;
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statActive').textContent = active;
+            document.getElementById('statInterviews').textContent = interviews;
+            document.getElementById('statOffers').textContent = offers;
+            document.getElementById('statReadinessAvg').textContent = `Avg Skill Readiness: ${avgSkill}%`;
+        }
+
+        function getFilteredApps() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const stage = document.getElementById('statusFilter').value;
+
+            return applications.filter(app => {
+                const matchesStage = stage === 'All' || app.status === stage;
+                const matchesQuery =
+                    app.company.toLowerCase().includes(query) ||
+                    app.role.toLowerCase().includes(query) ||
+                    (app.notes && app.notes.toLowerCase().includes(query));
+                return matchesStage && matchesQuery;
+            });
+        }
+
+        // Countdown badge shows ONLY when status is 'Interviewing'
+        function getDateBadgeHtml(app) {
+            if (!app.reminderDate) return `<span class="date-tag">&mdash;</span>`;
+            let badge = '';
+
+            if (app.status === 'Interviewing') {
+                const diff = getDayDiff(app.reminderDate);
+                if (diff < 0) {
+                    badge = `<span class="date-sub-badge" style="background:rgba(248,113,113,0.16);color:#fca5a5;">Overdue</span>`;
+                } else if (diff === 0) {
+                    badge = `<span class="date-sub-badge" style="background:rgba(251,146,60,0.16);color:#fdba74;">Today</span>`;
+                } else if (diff === 1) {
+                    badge = `<span class="date-sub-badge" style="background:rgba(251,191,36,0.16);color:#fde047;">1 Day Left</span>`;
+                } else if (diff <= 3) {
+                    badge = `<span class="date-sub-badge" style="background:rgba(56,189,248,0.16);color:#7dd3fc;">${diff} Days Left</span>`;
+                }
+            }
+
+            return `<span class="date-tag">${app.reminderDate}</span>${badge}`;
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('applicationsBody');
+            const filtered = getFilteredApps();
+            document.getElementById('recordCountLabel').textContent = `${filtered.length} records`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="empty-state">No matching opportunities found. Click "+ Add Opportunity" to create one.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(app => `
+        <tr>
+          <td>
+            <span class="company-name">${escapeHtml(app.company)}</span>
+            ${app.notes ? `<div class="note-preview" title="${escapeHtml(app.notes)}">📝 ${escapeHtml(app.notes)}</div>` : ''}
+          </td>
+          <td><span class="role-text">${escapeHtml(app.role)}</span></td>
+          <td>${getDateBadgeHtml(app)}</td>
+          <td><span class="badge status-${app.status}">${app.status}</span></td>
+          <td>
+            <div class="action-btns">
+              <button class="icon-btn" onclick="openModal(${app.id})" title="Edit">✏️ Edit</button>
+              <button class="icon-btn delete" onclick="deleteOpportunity(${app.id})" title="Delete">&times;</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderKanban() {
+      const board = document.getElementById('kanbanViewContainer');
+      const stages = ['Wishlist', 'Applied', 'Interviewing', 'Offer'];
+      const filtered = getFilteredApps();
+
+      board.innerHTML = stages.map(stage => {
+        const items = filtered.filter(a => a.status === stage);
+        return `
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span>${stage}</span>
+              <span>${items.length}</span>
+            </div>
+            ${items.length === 0 ? `<div style="font-size:0.76rem; color:var(--text-muted); text-align:center; padding:1rem 0;">Empty</div>` : ''}
+            ${items.map(item => `
+              <div class="kanban-card">
+                <div class="kanban-card-title">${escapeHtml(item.company)}</div>
+                <div class="kanban-card-role">${escapeHtml(item.role)}</div>
+                ${item.reminderDate ? getDateBadgeHtml(item) : ''}
+                <div class="kanban-card-footer">
+                  <button class="icon-btn" onclick="openModal(${item.id})">✏️ Edit</button>
+                  <button class="icon-btn delete" onclick="deleteOpportunity(${item.id})">&times;</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function switchView(view) {
+      const tableEl = document.getElementById('tableViewContainer');
+      const kanbanEl = document.getElementById('kanbanViewContainer');
+      const btnTable = document.getElementById('btnTableView');
+      const btnKanban = document.getElementById('btnKanbanView');
+
+      if (view === 'table') {
+        tableEl.style.display = 'block';
+        kanbanEl.classList.remove('active');
+        btnTable.classList.add('active');
+        btnKanban.classList.remove('active');
+      } else {
+        tableEl.style.display = 'none';
+        kanbanEl.classList.add('active');
+        btnKanban.classList.add('active');
+        btnTable.classList.remove('active');
+      }
+    }
+
+    function renderSkills() {
+      const list = document.getElementById('skillsList');
+      if (skills.length === 0) {
+        list.innerHTML = `<div class="empty-state" style="padding:1rem;">No skills added yet.</div>`;
+        return;
+      }
+
+      list.innerHTML = skills.map(skill => `
+        <div class="skill-item">
+          <div class="skill-top">
+            <span class="skill-name">${escapeHtml(skill.name)}</span>
+            <div class="skill-controls">
+              <span class="skill-pct" id="pct-${skill.id}">${skill.level}%</span>
+              <button class="skill-remove" onclick="removeSkill(${skill.id})" title="Remove">&times;</button>
+            </div>
+          </div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="${skill.level}"
+            oninput="updateSkillLevel(${skill.id}, this.value)"
+          />
+        </div>
+      `).join('');
+    }
+
+    function updateSkillLevel(id, value) {
+      const skill = skills.find(s => s.id === id);
+      if (skill) {
+        skill.level = Number(value);
+        document.getElementById(`pct-${id}`).textContent = `${value}%`;
+        persistData();
+        renderMetrics();
+      }
+    }
+
+    function addSkill(e) {
+      e.preventDefault();
+      const input = document.getElementById('newSkillName');
+      const name = input.value.trim();
+      if (!name) return;
+
+      skills.push({
+        id: Date.now(),
+        name,
+        level: 50
+      });
+      input.value = '';
+      persistData();
+      renderSkills();
+      renderMetrics();
+    }
+
+    function removeSkill(id) {
+      skills = skills.filter(s => s.id !== id);
+      persistData();
+      renderSkills();
+      renderMetrics();
+    }
+
+    function openModal(id = null) {
+      const modal = document.getElementById('opportunityModal');
+      const title = document.getElementById('modalTitle');
+      const saveBtn = document.getElementById('saveBtn');
+
+      if (id !== null) {
+        const app = applications.find(a => a.id === id);
+        if (!app) return;
+        title.textContent = 'Edit Opportunity';
+        saveBtn.textContent = 'Update Opportunity';
+        document.getElementById('editId').value = app.id;
+        document.getElementById('companyInput').value = app.company;
+        document.getElementById('roleInput').value = app.role;
+        document.getElementById('statusInput').value = app.status;
+        document.getElementById('reminderDateInput').value = app.reminderDate || '';
+        document.getElementById('notesInput').value = app.notes || '';
+      } else {
+        title.textContent = 'Add New Opportunity';
+        saveBtn.textContent = 'Save Opportunity';
+        document.getElementById('opportunityForm').reset();
+        document.getElementById('editId').value = '';
+      }
+
+      modal.classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('opportunityModal').classList.remove('open');
+    }
+
+    function saveOpportunity(e) {
+      e.preventDefault();
+      const editId = document.getElementById('editId').value;
+      const company = document.getElementById('companyInput').value.trim();
+      const role = document.getElementById('roleInput').value.trim();
+      const status = document.getElementById('statusInput').value;
+      const reminderDate = document.getElementById('reminderDateInput').value;
+      const notes = document.getElementById('notesInput').value.trim();
+
+      if (editId) {
+        const index = applications.findIndex(a => a.id === Number(editId));
+        if (index !== -1) {
+          applications[index] = {
+            ...applications[index],
+            company,
+            role,
+            status,
+            reminderDate,
+            notes
+          };
+        }
+      } else {
+        applications.unshift({
+          id: Date.now(),
+          company,
+          role,
+          status,
+          reminderDate,
+          notes
+        });
+      }
+
+      persistData();
+      closeModal();
+      renderAll(true);
+    }
+
+    function deleteOpportunity(id) {
+      if (confirm('Remove this opportunity from your tracker?')) {
+        applications = applications.filter(a => a.id !== id);
+        persistData();
+        renderAll();
+      }
+    }
+
+    function exportToCSV() {
+      if (applications.length === 0) {
+        alert('No records to export.');
+        return;
+      }
+      const headers = ['Company', 'Position', 'Date', 'Status', 'Notes'];
+      const rows = applications.map(a => [
+        `"${(a.company || '').replace(/"/g, '""')}"`,
+        `"${(a.role || '').replace(/"/g, '""')}"`,
+        `"${a.reminderDate || ''}"`,
+        `"${a.status}"`,
+        `"${(a.notes || '').replace(/"/g, '""')}"`
+      ]);
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'CareerTrack_Applications.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderAll(triggerToast = false) {
+      renderReminders(triggerToast);
+      renderMetrics();
+      renderTable();
+      renderKanban();
+      renderSkills();
+    }
+
+    document.getElementById('opportunityModal').addEventListener('click', (e) => {
+      if (e.target.id === 'opportunityModal') closeModal();
+    });
+
+    renderAll(true);
+    </script>
+</body>
+
+</html>
