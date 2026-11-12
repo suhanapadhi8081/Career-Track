@@ -13,4 +13,4 @@
 - **Frontend:** HTML5, CSS3 (Modern Deep Navy Theme), Vanilla JavaScript
 - **Typography:** Plus Jakarta Sans & JetBrains Mono
 
- **[Click Here to View Live Demo](https://suhanapadhi8081.github.io/Career-Track/)**
+ 👉🏻**[Click Here to View Live Demo](https://suhanapadhi8081.github.io/Career-Track/)**
