@@ -1,4 +1,4 @@
-# 🚀 CareerTrack
+#  CareerTrack
 
 > A modern, high-performance career application pipeline and readiness dashboard designed to track job applications, interviews, and core technical preparation metrics.
 
