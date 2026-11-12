@@ -1,675 +1,1484 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareerTrack | Professional Career Pipeline & Application Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --navy-darkest: #070e1b;
-            --navy-base: #0b172a;
-            --navy-surface: #112240;
-            --navy-card: #182c4f;
-            --navy-border: #233e6b;
-            --blue-accent: #38bdf8;
-            --blue-glow: rgba(56, 189, 248, 0.15);
-            --text-pure: #ffffff;
-            --text-muted: #cbd5e1;
-            --text-dim: #94a3b8;
-            --badge-applied: #38bdf8;
-            --badge-interview: #fbbf24;
-            --badge-offer: #34d399;
-            --badge-rejected: #f87171;
-            --badge-wishlist: #a78bfa;
-        }
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerTrack | Application Pipeline & Readiness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --navy-950: #060d1a;
+            --navy-900: #0a192f;
+            --navy-800: #112240;
+            --navy-700: #1d3557;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --white: #ffffff;
+            --success-bg: #ecfdf5;
+            --success-text: #047857;
+            --warn-bg: #fffbeb;
+            --warn-text: #b45309;
+            --orange-bg: #fff7ed;
+            --orange-text: #c2410c;
+            --danger-bg: #fef2f2;
+            --danger-text: #b91c1c;
+            --info-bg: #eff6ff;
+            --info-text: #1d4ed8;
+        }
+        
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
+        
         body {
-            background-color: var(--navy-darkest);
-            color: var(--text-pure);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--slate-50);
+            color: var(--navy-900);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
-
         /* Top Navigation */
+        
         header {
-            background: rgba(11, 23, 42, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--navy-border);
-            padding: 1.1rem 2rem;
+            background-color: var(--navy-900);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--navy-800);
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 40;
         }
-
-        .nav-wrap {
-            max-width: 1400px;
+        
+        .nav-container {
+            max-width: 1280px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
-
+        
         .brand {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-pure);
         }
-
+        
         .brand-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--blue-accent), #1d4ed8);
+            width: 36px;
+            height: 36px;
+            background: var(--white);
+            color: var(--navy-900);
+            border-radius: 8px;
             display: grid;
             place-items: center;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #070e1b;
-            box-shadow: 0 4px 14px var(--blue-glow);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
         }
-
-        .brand-name {
-            font-size: 1.35rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+        
+        .brand h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
-
-        .brand-name span {
-            color: var(--blue-accent);
+        
+        .brand span {
+            font-size: 0.75rem;
+            color: var(--slate-400);
+            display: block;
+            font-weight: 400;
         }
-
-        .top-actions {
+        
+        .header-actions {
             display: flex;
+            gap: 0.75rem;
             align-items: center;
-            gap: 1rem;
         }
-
+        
         .btn {
-            padding: 0.65rem 1.25rem;
-            border-radius: 8px;
-            font-size: 0.88rem;
+            font-family: inherit;
+            font-size: 0.875rem;
             font-weight: 600;
+            padding: 0.6rem 1.1rem;
+            border-radius: 8px;
+            border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            border: 1px solid transparent;
-            text-decoration: none;
+            gap: 0.45rem;
+            transition: all 0.15s ease;
         }
-
+        
         .btn-primary {
-            background: var(--blue-accent);
-            color: var(--navy-darkest);
+            background-color: var(--white);
+            color: var(--navy-900);
         }
-
+        
         .btn-primary:hover {
-            background: #7dd3fc;
-            box-shadow: 0 4px 12px var(--blue-glow);
+            background-color: var(--slate-100);
+            transform: translateY(-1px);
         }
-
-        .btn-outline {
+        
+        .btn-navy {
+            background-color: var(--navy-900);
+            color: var(--white);
+        }
+        
+        .btn-navy:hover {
+            background-color: var(--navy-800);
+        }
+        
+        .btn-outline-light {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+        
+        .btn-ghost {
             background: transparent;
-            border-color: var(--navy-border);
-            color: var(--text-pure);
+            color: var(--slate-600);
+            border: 1px solid var(--slate-200);
         }
-
-        .btn-outline:hover {
-            background: var(--navy-surface);
-            border-color: var(--blue-accent);
+        
+        .btn-ghost:hover {
+            background: var(--slate-100);
+            color: var(--navy-900);
         }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            width: 100%;
-            flex: 1;
+        /* Main Container */
+        
+        main {
+            max-width: 1280px;
+            margin: 1.75rem auto;
+            padding: 0 2rem 3rem;
         }
-
-        /* Hero / Overview */
-        .hero-banner {
-            background: linear-gradient(135deg, var(--navy-surface), var(--navy-card));
-            border: 1px solid var(--navy-border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-banner::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-title {
-            font-size: 1.85rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-sub {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 650px;
-        }
-
-        /* Metric Grid */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .metric-card {
-            background: var(--navy-surface);
-            border: 1px solid var(--navy-border);
+        /* Smart 4-Stage Reminders Strip */
+        
+        .reminders-panel {
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-left: 5px solid var(--navy-900);
             border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            transition: transform 0.2s;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(56, 189, 248, 0.5);
-        }
-
-        .metric-label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-dim);
-        }
-
-        .metric-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-top: 0.4rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Main Workspace Split */
-        .workspace {
-            display: grid;
-            grid-template-columns: 2.6fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .workspace {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Control Panel */
-        .panel-box {
-            background: var(--navy-surface);
-            border: 1px solid var(--navy-border);
-            border-radius: 14px;
-            padding: 1.5rem;
+            padding: 1rem 1.25rem;
             margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 2px 6px rgba(10, 25, 47, 0.05);
         }
-
-        .panel-header {
+        
+        .reminders-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--navy-border);
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
-
-        .panel-header h2 {
-            font-size: 1.15rem;
+        
+        .reminders-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--navy-900);
         }
-
-        .search-bar {
-            width: 100%;
-            background: var(--navy-base);
-            border: 1px solid var(--navy-border);
-            color: var(--text-pure);
-            padding: 0.7rem 1rem;
+        
+        .reminder-legend {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.72rem;
+            color: var(--slate-500);
+            flex-wrap: wrap;
+        }
+        
+        .reminder-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+        
+        .reminder-pill {
+            font-size: 0.8rem;
+            padding: 0.42rem 0.85rem;
+            border-radius: 999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            transition: transform 0.12s ease;
+        }
+        
+        .reminder-pill:hover {
+            transform: translateY(-1px);
+        }
+        
+        .reminder-overdue {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+            border: 1px solid #fca5a5;
+        }
+        
+        .reminder-today {
+            background: var(--orange-bg);
+            color: var(--orange-text);
+            border: 1px solid #fdba74;
+        }
+        
+        .reminder-tomorrow {
+            background: var(--warn-bg);
+            color: var(--warn-text);
+            border: 1px solid #fcd34d;
+        }
+        
+        .reminder-3days {
+            background: var(--info-bg);
+            color: var(--info-text);
+            border: 1px solid #93c5fd;
+        }
+        
+        .reminder-empty {
+            font-size: 0.84rem;
+            color: var(--slate-500);
+        }
+        /* Floating Toast Notification */
+        
+        .toast-alert {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--navy-900);
+            color: var(--white);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(6, 13, 26, 0.28);
+            max-width: 360px;
+            z-index: 60;
+            display: none;
+            border-left: 4px solid #f59e0b;
+            animation: slideUp 0.25s ease;
+        }
+        
+        .toast-alert.show {
+            display: block;
+        }
+        
+        .toast-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.35rem;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+        
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--slate-400);
+            font-size: 1.15rem;
+            cursor: pointer;
+        }
+        
+        .toast-body {
+            font-size: 0.8rem;
+            color: var(--slate-200);
+            line-height: 1.45;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        /* Metrics Grid */
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+        
+        .metric-card {
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 2px rgba(10, 25, 47, 0.03);
+        }
+        
+        .metric-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--slate-500);
+            margin-bottom: 0.4rem;
+        }
+        
+        .metric-value {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--navy-900);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .metric-sub {
+            font-size: 0.78rem;
+            color: var(--slate-500);
+            margin-top: 0.25rem;
+        }
+        /* Content Layout */
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2.15fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        
+        .card {
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(10, 25, 47, 0.04);
+        }
+        
+        .card-header {
+            padding: 1.15rem 1.5rem;
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--navy-900);
+        }
+        /* Controls Bar */
+        
+        .controls-bar {
+            padding: 1rem 1.5rem;
+            background: var(--slate-50);
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-group {
+            display: flex;
+            gap: 0.6rem;
+            flex: 1;
+            min-width: 240px;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            font-family: inherit;
+            font-size: 0.875rem;
+            padding: 0.55rem 0.85rem;
+            border: 1px solid var(--slate-200);
             border-radius: 8px;
-            font-size: 0.9rem;
-            margin-bottom: 1.25rem;
+            background: var(--white);
+            color: var(--navy-900);
             outline: none;
+            transition: border-color 0.15s;
         }
-
-        .search-bar:focus {
-            border-color: var(--blue-accent);
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--navy-900);
         }
-
+        
+        .search-input {
+            flex: 1;
+        }
+        
+        .view-toggle {
+            display: inline-flex;
+            background: var(--slate-200);
+            padding: 3px;
+            border-radius: 8px;
+        }
+        
+        .view-btn {
+            border: none;
+            background: transparent;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--slate-600);
+        }
+        
+        .view-btn.active {
+            background: var(--navy-900);
+            color: var(--white);
+        }
         /* Table View */
-        .table-responsive {
+        
+        .table-wrapper {
             overflow-x: auto;
         }
-
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-
-        th {
             text-align: left;
-            padding: 0.85rem 1rem;
-            color: var(--text-dim);
-            font-weight: 600;
-            border-bottom: 1px solid var(--navy-border);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
         }
-
+        
+        th {
+            background: var(--slate-50);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--slate-500);
+            padding: 0.85rem 1.25rem;
+            border-bottom: 1px solid var(--slate-200);
+        }
+        
         td {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(35, 62, 107, 0.5);
+            padding: 0.95rem 1.25rem;
+            border-bottom: 1px solid var(--slate-100);
+            font-size: 0.88rem;
             vertical-align: middle;
         }
-
+        
         tr:hover td {
-            background-color: rgba(24, 44, 79, 0.4);
+            background-color: #f8fafc;
         }
-
-        .company-meta {
+        
+        .company-name {
             font-weight: 700;
-            color: #ffffff;
-            font-size: 0.95rem;
+            color: var(--navy-900);
+            display: block;
         }
-
+        
+        .role-sub {
+            font-size: 0.8rem;
+            color: var(--slate-500);
+        }
+        
+        .note-preview {
+            font-size: 0.76rem;
+            color: var(--slate-600);
+            margin-top: 0.25rem;
+            max-width: 240px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
         .badge {
             display: inline-block;
             padding: 0.25rem 0.65rem;
-            border-radius: 9999px;
+            border-radius: 999px;
             font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
+            font-weight: 600;
         }
-
-        .badge.applied { background: rgba(56, 189, 248, 0.15); color: var(--badge-applied); border: 1px solid rgba(56, 189, 248, 0.3); }
-        .badge.interviewing { background: rgba(251, 191, 36, 0.15); color: var(--badge-interview); border: 1px solid rgba(251, 191, 36, 0.3); }
-        .badge.offer { background: rgba(52, 211, 153, 0.15); color: var(--badge-offer); border: 1px solid rgba(52, 211, 153, 0.3); }
-        .badge.rejected { background: rgba(248, 113, 113, 0.15); color: var(--badge-rejected); border: 1px solid rgba(248, 113, 113, 0.3); }
-        .badge.wishlist { background: rgba(167, 139, 250, 0.15); color: var(--badge-wishlist); border: 1px solid rgba(167, 139, 250, 0.3); }
-
-        .btn-delete {
-            background: transparent;
-            color: #f87171;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 0.2rem 0.5rem;
+        
+        .status-Wishlist {
+            background: var(--slate-100);
+            color: var(--slate-600);
+        }
+        
+        .status-Applied {
+            background: var(--info-bg);
+            color: var(--info-text);
+        }
+        
+        .status-Interviewing {
+            background: var(--warn-bg);
+            color: var(--warn-text);
+        }
+        
+        .status-Offer {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+        
+        .status-Rejected {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+        
+        .date-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--slate-600);
+            display: block;
+        }
+        
+        .date-sub-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 2px;
+            padding: 1px 6px;
             border-radius: 4px;
         }
-
-        .btn-delete:hover {
-            background: rgba(248, 113, 113, 0.15);
+        
+        .action-btns {
+            display: flex;
+            gap: 0.4rem;
         }
-
-        /* Sidebar - Skills Tracker */
+        
+        .icon-btn {
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: 6px;
+            padding: 0.35rem 0.55rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--navy-900);
+            transition: all 0.15s;
+        }
+        
+        .icon-btn:hover {
+            background: var(--navy-900);
+            color: var(--white);
+            border-color: var(--navy-900);
+        }
+        
+        .icon-btn.delete:hover {
+            background: var(--danger-text);
+            border-color: var(--danger-text);
+            color: var(--white);
+        }
+        /* Kanban View */
+        
+        .kanban-board {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.85rem;
+            padding: 1.25rem;
+            background: var(--slate-50);
+        }
+        
+        .kanban-board.active {
+            display: grid;
+        }
+        
+        .kanban-col {
+            background: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: 10px;
+            padding: 0.75rem;
+            min-height: 300px;
+        }
+        
+        .kanban-col-header {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--navy-900);
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid var(--slate-100);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .kanban-card {
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.65rem;
+        }
+        
+        .kanban-card-title {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--navy-900);
+        }
+        
+        .kanban-card-role {
+            font-size: 0.78rem;
+            color: var(--slate-600);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kanban-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--slate-200);
+        }
+        /* Tech Stack Readiness Panel */
+        
+        .skills-body {
+            padding: 1.25rem 1.5rem;
+        }
+        
         .skill-item {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.15rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid var(--slate-100);
         }
-
+        
+        .skill-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
         .skill-top {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
-            margin-bottom: 0.4rem;
+            align-items: center;
+            margin-bottom: 0.45rem;
+        }
+        
+        .skill-name {
             font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--navy-900);
         }
-
-        .bar-wrap {
+        
+        .skill-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .skill-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--navy-900);
+            min-width: 38px;
+            text-align: right;
+        }
+        
+        .skill-remove {
+            background: none;
+            border: none;
+            color: var(--slate-400);
+            cursor: pointer;
+            font-size: 0.95rem;
+            line-height: 1;
+        }
+        
+        .skill-remove:hover {
+            color: var(--danger-text);
+        }
+        
+        input[type="range"] {
             width: 100%;
-            height: 7px;
-            background: var(--navy-base);
-            border-radius: 9999px;
-            overflow: hidden;
-            border: 1px solid var(--navy-border);
+            accent-color: var(--navy-900);
+            cursor: pointer;
+            height: 6px;
         }
-
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #1d4ed8, var(--blue-accent));
-            border-radius: 9999px;
+        
+        .add-skill-box {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--slate-200);
         }
-
+        
+        .add-skill-box input {
+            flex: 1;
+            min-width: 0;
+        }
         /* Modal */
-        .modal-overlay {
+        
+        .modal-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(4, 9, 20, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(6, 13, 26, 0.65);
             display: none;
             place-items: center;
-            z-index: 100;
+            z-index: 50;
             padding: 1rem;
         }
-
-        .modal-overlay.active {
+        
+        .modal-backdrop.open {
             display: grid;
         }
-
-        .modal-card {
-            background: var(--navy-surface);
-            border: 1px solid var(--navy-border);
+        
+        .modal {
+            background: var(--white);
+            width: 100%;
+            max-width: 480px;
             border-radius: 14px;
-            width: 100%;
-            max-width: 520px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
         }
-
-        .modal-title {
-            font-size: 1.25rem;
+        
+        .modal-header {
+            background: var(--navy-900);
+            color: var(--white);
+            padding: 1.15rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 1.25rem;
         }
-
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--slate-400);
+            font-size: 1.35rem;
+            cursor: pointer;
+        }
+        
+        .close-modal:hover {
+            color: var(--white);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
         .form-group {
-            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
         }
-
+        
         .form-group label {
-            display: block;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
+            color: var(--navy-900);
         }
-
-        .form-input, .form-select {
-            width: 100%;
-            background: var(--navy-base);
-            border: 1px solid var(--navy-border);
-            color: var(--text-pure);
-            padding: 0.65rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            outline: none;
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
         }
-
-        .form-input:focus, .form-select:focus {
-            border-color: var(--blue-accent);
-        }
-
-        .modal-btns {
+        
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            background: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
             display: flex;
             justify-content: flex-end;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
+            gap: 0.65rem;
         }
-
-        footer {
-            margin-top: auto;
-            border-top: 1px solid var(--navy-border);
-            padding: 1.5rem;
+        
+        .empty-state {
             text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            background: var(--navy-base);
+            padding: 2.5rem 1rem;
+            color: var(--slate-500);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 960px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .kanban-board.active {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header,
+            main {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .kanban-board.active {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
-        <div class="nav-wrap">
-            <a href="#" class="brand">
+        <div class="nav-container">
+            <div class="brand">
                 <div class="brand-icon">CT</div>
-                <div class="brand-name">Career<span>Track</span></div>
-            </a>
-            <div class="top-actions">
+                <div>
+                    <h1>CareerTrack</h1>
+                    <span>Application Pipeline &amp; Readiness Workspace</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline-light" onclick="exportToCSV()">Export CSV</button>
                 <button class="btn btn-primary" onclick="openModal()">+ Add Opportunity</button>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <section class="hero-banner">
-            <h1 class="hero-title">Career Pipeline Dashboard</h1>
-            <p class="hero-sub">Organize your job search, track interview stages, and measure preparation metrics all in one place.</p>
+    <main>
+        <!-- Smart 4-Stage Reminders Panel -->
+        <section class="reminders-panel" id="remindersPanel">
+            <div class="reminders-header">
+                <div class="reminders-title">
+                    <span>⏰ Smart Reminders (3 Days Before &bull; 1 Day Before &bull; Today &bull; Overdue)</span>
+                </div>
+                <div class="reminder-legend">
+                    <span>🔴 Overdue</span>
+                    <span>🟠 Today</span>
+                    <span>🟡 1 Day Left</span>
+                    <span>🔵 2–3 Days Left</span>
+                </div>
+            </div>
+            <div class="reminder-pills" id="reminderPills"></div>
         </section>
 
-        <!-- Dynamic Metrics -->
-        <div class="metrics-grid">
+        <!-- Metrics Summary -->
+        <section class="metrics-grid">
             <div class="metric-card">
-                <div class="metric-label">Total Pipeline</div>
-                <div class="metric-value" id="count-total">0</div>
+                <div class="metric-label">Total Tracked</div>
+                <div class="metric-value" id="statTotal">0</div>
+                <div class="metric-sub">All pipeline entries</div>
             </div>
             <div class="metric-card">
-                <div class="metric-label">Active Applications</div>
-                <div class="metric-value" style="color: var(--badge-applied);" id="count-applied">0</div>
+                <div class="metric-label">Active Pipeline</div>
+                <div class="metric-value" id="statActive">0</div>
+                <div class="metric-sub">Applied &amp; Interviewing</div>
             </div>
             <div class="metric-card">
-                <div class="metric-label">In Interview</div>
-                <div class="metric-value" style="color: var(--badge-interview);" id="count-interview">0</div>
+                <div class="metric-label">Interviews</div>
+                <div class="metric-value" id="statInterviews">0</div>
+                <div class="metric-sub">Scheduled or in-progress</div>
             </div>
             <div class="metric-card">
-                <div class="metric-label">Offers Received</div>
-                <div class="metric-value" style="color: var(--badge-offer);" id="count-offer">0</div>
+                <div class="metric-label">Offers &amp; Avg Readiness</div>
+                <div class="metric-value" id="statOffers">0</div>
+                <div class="metric-sub" id="statReadinessAvg">Avg Skill Readiness: 0%</div>
             </div>
-        </div>
+        </section>
 
-        <div class="workspace">
-            <!-- Applications Table -->
-            <div>
-                <div class="panel-box">
-                    <div class="panel-header">
-                        <h2>Application Stream</h2>
-                        <span id="stream-count" style="font-size: 0.85rem; color: var(--text-dim);">0 records</span>
-                    </div>
-
-                    <input type="text" id="searchInput" class="search-bar" placeholder="Filter by company, position, or role..." oninput="renderTable()">
-
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Position</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th style="text-align: right;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="applicationsBody">
-                                <!-- Populated dynamically -->
-                            </tbody>
-                        </table>
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Applications Pipeline Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Opportunity Pipeline</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="btnTableView" onclick="switchView('table')">Table View</button>
+                        <button class="view-btn" id="btnKanbanView" onclick="switchView('kanban')">Kanban Board</button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tech Readiness Tracker -->
-            <aside>
-                <div class="panel-box">
-                    <div class="panel-header">
-                        <h2>Tech Stack Readiness</h2>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-top"><span>Python</span><span style="color: var(--blue-accent);">90%</span></div>
-                        <div class="bar-wrap"><div class="bar-fill" style="width: 90%;"></div></div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-top"><span>Flask / REST APIs</span><span style="color: var(--blue-accent);">80%</span></div>
-                        <div class="bar-wrap"><div class="bar-fill" style="width: 80%;"></div></div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-top"><span>SQL / Database Design</span><span style="color: var(--blue-accent);">75%</span></div>
-                        <div class="bar-wrap"><div class="bar-fill" style="width: 75%;"></div></div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-top"><span>Data Structures & Algorithms</span><span style="color: var(--blue-accent);">70%</span></div>
-                        <div class="bar-wrap"><div class="bar-fill" style="width: 70%;"></div></div>
-                    </div>
-
-                    <div class="skill-item">
-                        <div class="skill-top"><span>Machine Learning & AI</span><span style="color: var(--blue-accent);">65%</span></div>
-                        <div class="bar-wrap"><div class="bar-fill" style="width: 65%;"></div></div>
+                <div class="controls-bar">
+                    <div class="search-group">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search company, role, or notes..." oninput="renderAll()" />
+                        <select id="statusFilter" onchange="renderAll()">
+              <option value="All">All Stages</option>
+              <option value="Wishlist">Wishlist</option>
+              <option value="Applied">Applied</option>
+              <option value="Interviewing">Interviewing</option>
+              <option value="Offer">Offer</option>
+              <option value="Rejected">Rejected</option>
+            </select>
                     </div>
                 </div>
-            </aside>
+
+                <!-- Table View -->
+                <div class="table-wrapper" id="tableViewContainer">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company &amp; Role</th>
+                                <th>Stage</th>
+                                <th>Reminder Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Kanban Board View -->
+                <div class="kanban-board" id="kanbanViewContainer"></div>
+            </div>
+
+            <!-- Interactive Tech Stack Readiness Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Tech Stack Readiness</h2>
+                </div>
+                <div class="skills-body">
+                    <p style="font-size: 0.8rem; color: var(--slate-500); margin-bottom: 1rem;">
+                        Adjust sliders as you complete topics and mock assessments.
+                    </p>
+                    <div id="skillsList"></div>
+
+                    <form class="add-skill-box" onsubmit="addSkill(event)">
+                        <input type="text" id="newSkillName" placeholder="Add skill (e.g. SQL, React)..." required />
+                        <button type="submit" class="btn btn-navy" style="padding: 0.5rem 0.85rem;">+ Add</button>
+                    </form>
+                </div>
+            </div>
         </div>
+    </main>
+
+    <!-- Floating Alert Toast -->
+    <div class="toast-alert" id="toastAlert">
+        <div class="toast-top">
+            <span id="toastTitle">⏰ Priority Reminder</span>
+            <button class="toast-close" onclick="closeToast()">&times;</button>
+        </div>
+        <div class="toast-body" id="toastBody"></div>
     </div>
 
-    <!-- Modal Form -->
-    <div class="modal-overlay" id="jobModal">
-        <div class="modal-card">
-            <h3 class="modal-title">Log New Opportunity</h3>
+    <!-- Add / Edit Opportunity Modal -->
+    <div class="modal-backdrop" id="opportunityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Opportunity</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
             <form id="opportunityForm" onsubmit="saveOpportunity(event)">
-                <div class="form-group">
-                    <label>Company Name</label>
-                    <input type="text" id="compName" class="form-input" required placeholder="e.g., Google, Microsoft, Startup">
+                <div class="modal-body">
+                    <input type="hidden" id="editId" />
+                    <div class="form-group">
+                        <label for="companyInput">Company / Organization *</label>
+                        <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, TCS" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="roleInput">Target Role *</label>
+                        <input type="text" id="roleInput" placeholder="e.g. AI/ML Intern, Software Engineer" required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="statusInput">Pipeline Stage</label>
+                            <select id="statusInput">
+                <option value="Wishlist">Wishlist</option>
+                <option value="Applied">Applied</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminderDateInput">Reminder / Interview Date</label>
+                            <input type="date" id="reminderDateInput" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="notesInput">Preparation Notes / Action Item</label>
+                        <textarea id="notesInput" rows="3" placeholder="e.g. Revise Python OOPs, follow up with HR on Friday..."></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Role / Position</label>
-                    <input type="text" id="compRole" class="form-input" required placeholder="e.g., AI Engineer, Python Developer">
-                </div>
-                <div class="form-group">
-                    <label>Application Status</label>
-                    <select id="compStatus" class="form-select">
-                        <option value="Wishlist">Wishlist</option>
-                        <option value="Applied" selected>Applied</option>
-                        <option value="Interviewing">Interviewing</option>
-                        <option value="Offer">Offer</option>
-                        <option value="Rejected">Rejected</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" id="compDate" class="form-input" required>
-                </div>
-                <div class="modal-btns">
-                    <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save to Tracker</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-navy" id="saveBtn">Save Opportunity</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <footer>
-        CareerTrack &bull; Open-Source Career Pipeline System
-    </footer>
-
     <script>
-        // Seed initial items if empty
-        const defaultData = [
-            { id: 1, company: "Google", role: "AI Software Intern", date: "2026-11-01", status: "Interviewing" },
-            { id: 2, company: "Microsoft", role: "Graduate Engineer Trainee", date: "2026-10-28", status: "Applied" },
-            { id: 3, company: "TCS Research", role: "Python Developer", date: "2026-10-15", status: "Offer" },
-            { id: 4, company: "Amazon", role: "Data Engineer", date: "2026-09-30", status: "Wishlist" }
-        ];
+        const STORAGE_APPS_KEY = 'careertrack_apps_v2';
+        const STORAGE_SKILLS_KEY = 'careertrack_skills_v2';
 
-        let applications = JSON.parse(localStorage.getItem('careertrack_apps')) || defaultData;
+        const defaultApps = [{
+            id: 1,
+            company: 'Google',
+            role: 'STEP / AI Software Intern',
+            status: 'Interviewing',
+            reminderDate: getOffsetDate(1),
+            notes: '1 Day Left: Final DSA & Trees revision before interview.'
+        }, {
+            id: 2,
+            company: 'Microsoft',
+            role: 'Explore Software Engineering Intern',
+            status: 'Applied',
+            reminderDate: getOffsetDate(3),
+            notes: '3 Days Left: Follow up on application portal status.'
+        }, {
+            id: 3,
+            company: 'NVIDIA',
+            role: 'Deep Learning Research Intern',
+            status: 'Wishlist',
+            reminderDate: getOffsetDate(0),
+            notes: 'Today: Submit tailored resume & project links.'
+        }];
 
-        function saveToStorage() {
-            localStorage.setItem('careertrack_apps', JSON.stringify(applications));
-            updateMetrics();
-            renderTable();
+        const defaultSkills = [{
+            id: 101,
+            name: 'Python & Core Programming',
+            level: 80
+        }, {
+            id: 102,
+            name: 'Data Structures & Algorithms',
+            level: 65
+        }, {
+            id: 103,
+            name: 'Machine Learning & AI Fundamentals',
+            level: 70
+        }, {
+            id: 104,
+            name: 'Web Development (HTML/CSS/Flask)',
+            level: 75
+        }];
+
+        function getOffsetDate(days) {
+            const d = new Date();
+            d.setDate(d.getDate() + days);
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
 
-        function updateMetrics() {
-            document.getElementById('count-total').innerText = applications.length;
-            document.getElementById('count-applied').innerText = applications.filter(a => a.status === 'Applied').length;
-            document.getElementById('count-interview').innerText = applications.filter(a => a.status === 'Interviewing').length;
-            document.getElementById('count-offer').innerText = applications.filter(a => a.status === 'Offer').length;
-            document.getElementById('stream-count').innerText = `${applications.length} records`;
+        function getTodayLocalStr() {
+            return getOffsetDate(0);
         }
 
-        function renderTable() {
-            const query = (document.getElementById('searchInput').value || '').toLowerCase();
-            const tbody = document.getElementById('applicationsBody');
-            tbody.innerHTML = '';
+        function getDayDiff(dateStr) {
+            if (!dateStr) return null;
+            const [y1, m1, d1] = getTodayLocalStr().split('-').map(Number);
+            const [y2, m2, d2] = dateStr.split('-').map(Number);
+            const todayUtc = Date.UTC(y1, m1 - 1, d1);
+            const targetUtc = Date.UTC(y2, m2 - 1, d2);
+            return Math.round((targetUtc - todayUtc) / (1000 * 60 * 60 * 24));
+        }
 
-            const filtered = applications.filter(a => 
-                a.company.toLowerCase().includes(query) || 
-                a.role.toLowerCase().includes(query)
-            );
+        let applications = JSON.parse(localStorage.getItem(STORAGE_APPS_KEY)) || defaultApps;
+        let skills = JSON.parse(localStorage.getItem(STORAGE_SKILLS_KEY)) || defaultSkills;
+        let currentView = 'table';
 
-            if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-dim); padding: 2rem;">No matching applications found.</td></tr>`;
+        function persistData() {
+            localStorage.setItem(STORAGE_APPS_KEY, JSON.stringify(applications));
+            localStorage.setItem(STORAGE_SKILLS_KEY, JSON.stringify(skills));
+        }
+
+        // 4-Stage Smart Reminder Banner (Overdue, Today, 1 Day Before, 3 Days Before)
+        function renderReminders(triggerToast = false) {
+            const container = document.getElementById('reminderPills');
+
+            const activeReminders = applications
+                .filter(app => app.reminderDate && app.status !== 'Rejected' && app.status !== 'Offer')
+                .map(app => ({...app,
+                    diffDays: getDayDiff(app.reminderDate)
+                }))
+                .filter(app => app.diffDays !== null && app.diffDays <= 3)
+                .sort((a, b) => a.diffDays - b.diffDays);
+
+            if (activeReminders.length === 0) {
+                container.innerHTML = `<span class="reminder-empty">No deadlines due within the next 3 days. Set reminder dates while adding or editing opportunities.</span>`;
                 return;
             }
 
-            filtered.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><div class="company-meta">${item.company}</div></td>
-                    <td>${item.role}</td>
-                    <td><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-dim);">${item.date}</span></td>
-                    <td><span class="badge ${item.status.toLowerCase()}">${item.status}</span></td>
-                    <td style="text-align: right;">
-                        <button class="btn-delete" title="Delete" onclick="deleteItem(${item.id})">&times;</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
+            container.innerHTML = activeReminders.map(item => {
+                let cls = 'reminder-3days';
+                let icon = '🔵';
+                let label = `${item.diffDays} Days Left`;
+
+                if (item.diffDays < 0) {
+                    cls = 'reminder-overdue';
+                    icon = '🔴';
+                    label = `Overdue (${Math.abs(item.diffDays)}d ago)`;
+                } else if (item.diffDays === 0) {
+                    cls = 'reminder-today';
+                    icon = '🟠';
+                    label = 'TODAY (Due Now)';
+                } else if (item.diffDays === 1) {
+                    cls = 'reminder-tomorrow';
+                    icon = '🟡';
+                    label = '1 DAY BEFORE (Tomorrow)';
+                } else if (item.diffDays === 3) {
+                    cls = 'reminder-3days';
+                    icon = '🔵';
+                    label = '3 DAYS BEFORE';
+                }
+
+                return `
+          <span class="reminder-pill ${cls}" onclick="openModal(${item.id})" title="Click to view or edit">
+            ${icon} <strong>${escapeHtml(item.company)}</strong> (${escapeHtml(item.role)}) &mdash; ${label}
+          </span>
+        `;
+            }).join('');
+
+            if (triggerToast) {
+                const urgent = activeReminders.filter(r => r.diffDays <= 1);
+                if (urgent.length > 0) {
+                    const lines = urgent.map(u => {
+                        const tag = u.diffDays < 0 ? 'Overdue' : (u.diffDays === 0 ? 'Today' : 'Tomorrow (1 Day Left)');
+                        return `&bull; <strong>${escapeHtml(u.company)}</strong> (${tag})`;
+                    }).join('<br>');
+                    document.getElementById('toastBody').innerHTML = lines;
+                    document.getElementById('toastAlert').classList.add('show');
+                }
+            }
+        }
+
+        function closeToast() {
+            document.getElementById('toastAlert').classList.remove('show');
+        }
+
+        // Render KPI Metrics
+        function renderMetrics() {
+            const total = applications.length;
+            const active = applications.filter(a => a.status === 'Applied' || a.status === 'Interviewing').length;
+            const interviews = applications.filter(a => a.status === 'Interviewing').length;
+            const offers = applications.filter(a => a.status === 'Offer').length;
+
+            const avgSkill = skills.length ?
+                Math.round(skills.reduce((acc, s) => acc + Number(s.level), 0) / skills.length) :
+                0;
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statActive').textContent = active;
+            document.getElementById('statInterviews').textContent = interviews;
+            document.getElementById('statOffers').textContent = offers;
+            document.getElementById('statReadinessAvg').textContent = `Avg Skill Readiness: ${avgSkill}%`;
+        }
+
+        // Filter Helper
+        function getFilteredApps() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const stage = document.getElementById('statusFilter').value;
+
+            return applications.filter(app => {
+                const matchesStage = stage === 'All' || app.status === stage;
+                const matchesQuery =
+                    app.company.toLowerCase().includes(query) ||
+                    app.role.toLowerCase().includes(query) ||
+                    (app.notes && app.notes.toLowerCase().includes(query));
+                return matchesStage && matchesQuery;
             });
         }
 
-        function openModal() {
-            document.getElementById('jobModal').classList.add('active');
-            document.getElementById('compDate').value = new Date().toISOString().split('T')[0];
+        function getDateBadgeHtml(app) {
+            if (!app.reminderDate) return `<span class="date-tag">&mdash;</span>`;
+            const diff = getDayDiff(app.reminderDate);
+            let badge = '';
+
+            if (app.status !== 'Offer' && app.status !== 'Rejected') {
+                if (diff < 0) {
+                    badge = `<span class="date-sub-badge" style="background:var(--danger-bg);color:var(--danger-text);">Overdue</span>`;
+                } else if (diff === 0) {
+                    badge = `<span class="date-sub-badge" style="background:var(--orange-bg);color:var(--orange-text);">Today</span>`;
+                } else if (diff === 1) {
+                    badge = `<span class="date-sub-badge" style="background:var(--warn-bg);color:var(--warn-text);">1 Day Left</span>`;
+                } else if (diff <= 3) {
+                    badge = `<span class="date-sub-badge" style="background:var(--info-bg);color:var(--info-text);">${diff} Days Left</span>`;
+                }
+            }
+
+            return `<span class="date-tag">${app.reminderDate}</span>${badge}`;
         }
 
-        function closeModal() {
-            document.getElementById('jobModal').classList.remove('active');
-            document.getElementById('opportunityForm').reset();
+        // Render Table View
+        function renderTable() {
+            const tbody = document.getElementById('applicationsBody');
+            const filtered = getFilteredApps();
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="empty-state">No matching opportunities found. Click "+ Add Opportunity" to create one.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(app => `
+        <tr>
+          <td>
+            <span class="company-name">${escapeHtml(app.company)}</span>
+            <span class="role-sub">${escapeHtml(app.role)}</span>
+            ${app.notes ? `<div class="note-preview" title="${escapeHtml(app.notes)}">📝 ${escapeHtml(app.notes)}</div>` : ''}
+          </td>
+          <td><span class="badge status-${app.status}">${app.status}</span></td>
+          <td>${getDateBadgeHtml(app)}</td>
+          <td>
+            <div class="action-btns">
+              <button class="icon-btn" onclick="openModal(${app.id})" title="Edit Opportunity">✏️ Edit</button>
+              <button class="icon-btn delete" onclick="deleteOpportunity(${app.id})" title="Delete">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Render Kanban View
+    function renderKanban() {
+      const board = document.getElementById('kanbanViewContainer');
+      const stages = ['Wishlist', 'Applied', 'Interviewing', 'Offer'];
+      const filtered = getFilteredApps();
+
+      board.innerHTML = stages.map(stage => {
+        const items = filtered.filter(a => a.status === stage);
+        return `
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span>${stage}</span>
+              <span>${items.length}</span>
+            </div>
+            ${items.length === 0 ? `<div style="font-size:0.78rem; color:var(--slate-400); text-align:center; padding:1rem 0;">Empty</div>` : ''}
+            ${items.map(item => `
+              <div class="kanban-card">
+                <div class="kanban-card-title">${escapeHtml(item.company)}</div>
+                <div class="kanban-card-role">${escapeHtml(item.role)}</div>
+                ${item.reminderDate ? getDateBadgeHtml(item) : ''}
+                <div class="kanban-card-footer">
+                  <button class="icon-btn" onclick="openModal(${item.id})">✏️ Edit</button>
+                  <button class="icon-btn delete" onclick="deleteOpportunity(${item.id})">🗑️</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Switch Table / Kanban View
+    function switchView(view) {
+      currentView = view;
+      const tableEl = document.getElementById('tableViewContainer');
+      const kanbanEl = document.getElementById('kanbanViewContainer');
+      const btnTable = document.getElementById('btnTableView');
+      const btnKanban = document.getElementById('btnKanbanView');
+
+      if (view === 'table') {
+        tableEl.style.display = 'block';
+        kanbanEl.classList.remove('active');
+        btnTable.classList.add('active');
+        btnKanban.classList.remove('active');
+      } else {
+        tableEl.style.display = 'none';
+        kanbanEl.classList.add('active');
+        btnKanban.classList.add('active');
+        btnTable.classList.remove('active');
+      }
+    }
+
+    // Render Tech Stack Readiness
+    function renderSkills() {
+      const list = document.getElementById('skillsList');
+      if (skills.length === 0) {
+        list.innerHTML = `<div class="empty-state" style="padding:1rem;">No skills added yet. Add your core tech stack below.</div>`;
+        return;
+      }
+
+      list.innerHTML = skills.map(skill => `
+        <div class="skill-item">
+          <div class="skill-top">
+            <span class="skill-name">${escapeHtml(skill.name)}</span>
+            <div class="skill-controls">
+              <span class="skill-pct" id="pct-${skill.id}">${skill.level}%</span>
+              <button class="skill-remove" onclick="removeSkill(${skill.id})" title="Remove Skill">&times;</button>
+            </div>
+          </div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="${skill.level}"
+            oninput="updateSkillLevel(${skill.id}, this.value)"
+          />
+        </div>
+      `).join('');
+    }
+
+    function updateSkillLevel(id, value) {
+      const skill = skills.find(s => s.id === id);
+      if (skill) {
+        skill.level = Number(value);
+        document.getElementById(`pct-${id}`).textContent = `${value}%`;
+        persistData();
+        renderMetrics();
+      }
+    }
+
+    function addSkill(e) {
+      e.preventDefault();
+      const input = document.getElementById('newSkillName');
+      const name = input.value.trim();
+      if (!name) return;
+
+      skills.push({
+        id: Date.now(),
+        name,
+        level: 50
+      });
+      input.value = '';
+      persistData();
+      renderSkills();
+      renderMetrics();
+    }
+
+    function removeSkill(id) {
+      skills = skills.filter(s => s.id !== id);
+      persistData();
+      renderSkills();
+      renderMetrics();
+    }
+
+    // Modal Open (Supports both Add & Edit)
+    function openModal(id = null) {
+      const modal = document.getElementById('opportunityModal');
+      const title = document.getElementById('modalTitle');
+      const saveBtn = document.getElementById('saveBtn');
+
+      if (id !== null) {
+        const app = applications.find(a => a.id === id);
+        if (!app) return;
+        title.textContent = 'Edit Opportunity';
+        saveBtn.textContent = 'Update Opportunity';
+        document.getElementById('editId').value = app.id;
+        document.getElementById('companyInput').value = app.company;
+        document.getElementById('roleInput').value = app.role;
+        document.getElementById('statusInput').value = app.status;
+        document.getElementById('reminderDateInput').value = app.reminderDate || '';
+        document.getElementById('notesInput').value = app.notes || '';
+      } else {
+        title.textContent = 'Add New Opportunity';
+        saveBtn.textContent = 'Save Opportunity';
+        document.getElementById('opportunityForm').reset();
+        document.getElementById('editId').value = '';
+      }
+
+      modal.classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('opportunityModal').classList.remove('open');
+    }
+
+    function saveOpportunity(e) {
+      e.preventDefault();
+      const editId = document.getElementById('editId').value;
+      const company = document.getElementById('companyInput').value.trim();
+      const role = document.getElementById('roleInput').value.trim();
+      const status = document.getElementById('statusInput').value;
+      const reminderDate = document.getElementById('reminderDateInput').value;
+      const notes = document.getElementById('notesInput').value.trim();
+
+      if (editId) {
+        const index = applications.findIndex(a => a.id === Number(editId));
+        if (index !== -1) {
+          applications[index] = {
+            ...applications[index],
+            company,
+            role,
+            status,
+            reminderDate,
+            notes
+          };
         }
-
-        function saveOpportunity(e) {
-            e.preventDefault();
-            const newItem = {
-                id: Date.now(),
-                company: document.getElementById('compName').value.trim(),
-                role: document.getElementById('compRole').value.trim(),
-                status: document.getElementById('compStatus').value,
-                date: document.getElementById('compDate').value
-            };
-
-            applications.unshift(newItem);
-            saveToStorage();
-            closeModal();
-        }
-
-        function deleteItem(id) {
-            applications = applications.filter(a => a.id !== id);
-            saveToStorage();
-        }
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            saveToStorage();
+      } else {
+        applications.unshift({
+          id: Date.now(),
+          company,
+          role,
+          status,
+          reminderDate,
+          notes
         });
+      }
+
+      persistData();
+      closeModal();
+      renderAll(true);
+    }
+
+    function deleteOpportunity(id) {
+      if (confirm('Remove this opportunity from your tracker?')) {
+        applications = applications.filter(a => a.id !== id);
+        persistData();
+        renderAll();
+      }
+    }
+
+    // Export CSV
+    function exportToCSV() {
+      if (applications.length === 0) {
+        alert('No records to export.');
+        return;
+      }
+      const headers = ['Company', 'Role', 'Stage', 'Reminder Date', 'Notes'];
+      const rows = applications.map(a => [
+        `"${(a.company || '').replace(/"/g, '""')}"`,
+        `"${(a.role || '').replace(/"/g, '""')}"`,
+        `"${a.status}"`,
+        `"${a.reminderDate || ''}"`,
+        `"${(a.notes || '').replace(/"/g, '""')}"`
+      ]);
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'CareerTrack_Applications.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderAll(triggerToast = false) {
+      renderReminders(triggerToast);
+      renderMetrics();
+      renderTable();
+      renderKanban();
+      renderSkills();
+    }
+
+    document.getElementById('opportunityModal').addEventListener('click', (e) => {
+      if (e.target.id === 'opportunityModal') closeModal();
+    });
+
+    // Initial render with toast alert check
+    renderAll(true);
     </script>
 </body>
+
 </html>
