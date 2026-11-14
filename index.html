@@ -32,7 +32,6 @@
             <p>Organize internship applications, upcoming interview dates, and topic-wise revision in one place.</p>
         </div>
 
-        <!-- Upcoming Alerts Strip -->
         <section class="alert-strip">
             <div class="alert-strip-head">
                 <span class="alert-heading">Upcoming Interviews</span>
@@ -46,7 +45,6 @@
             <div class="alert-list" id="reminderList"></div>
         </section>
 
-        <!-- Summary Cards -->
         <section class="stats-row">
             <div class="stat-box">
                 <span class="stat-title">Total Saved</span>
@@ -70,10 +68,7 @@
             </div>
         </section>
 
-        <!-- Main Split Workspace -->
         <div class="workspace">
-
-            <!-- Applications Panel -->
             <section class="panel">
                 <div class="panel-head">
                     <div class="panel-title-group">
@@ -99,7 +94,6 @@
                     </select>
                 </div>
 
-                <!-- Table View -->
                 <div class="table-container" id="tableView">
                     <table>
                         <thead>
@@ -118,11 +112,9 @@
                     </div>
                 </div>
 
-                <!-- Board View -->
                 <div class="board-container" id="boardView"></div>
             </section>
 
-            <!-- Prep Checklist Panel -->
             <aside class="panel">
                 <div class="panel-head">
                     <div class="panel-title-group">
@@ -139,11 +131,9 @@
                     </form>
                 </div>
             </aside>
-
         </div>
     </main>
 
-    <!-- Toast Notification -->
     <div class="toast" id="reminderToast">
         <div class="toast-head">
             <span>Upcoming Interview</span>
@@ -152,7 +142,6 @@
         <div class="toast-msg" id="toastBody"></div>
     </div>
 
-    <!-- Modal Dialog -->
     <div class="overlay" id="modalBackdrop">
         <div class="dialog">
             <div class="dialog-head">
@@ -164,7 +153,7 @@
                     <input type="hidden" id="appId" />
                     <div class="field">
                         <label for="companyInput">Company Name *</label>
-                        <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, Razorpay" required />
+                        <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, Infosys" required />
                     </div>
                     <div class="field">
                         <label for="roleInput">Position / Role *</label>
