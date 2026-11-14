@@ -222,12 +222,13 @@ body {
     font-weight: 500;
     cursor: pointer;
     border: 1px solid transparent;
-    transition: transform 0.16s ease, box-shadow 0.16s ease;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
 }
 
 .reminder-pill:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    filter: brightness(0.97);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
 .reminder-overdue {
@@ -275,14 +276,14 @@ body {
     border-radius: 10px;
     padding: 1.1rem 1.25rem;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .stat-box:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-    background: var(--accent-bg);
-    box-shadow: 0 12px 24px rgba(21, 128, 61, 0.12);
+    transform: translateY(-3px);
+    background: var(--bg);
+    border-color: var(--border-dark);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
 }
 
 .stat-title {
@@ -624,13 +625,14 @@ tr:hover td {
     border-radius: 7px;
     padding: 0.7rem;
     margin-bottom: 0.55rem;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .kanban-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.09);
+    transform: translateY(-3px);
+    background: var(--bg);
+    border-color: var(--border-dark);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
 }
 
 .kanban-card-title {
@@ -675,10 +677,10 @@ tr:hover td {
 }
 
 .skill-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent);
+    transform: translateY(-2px);
     background: var(--surface);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
+    border-color: var(--border-dark);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
 }
 
 .skill-top {
