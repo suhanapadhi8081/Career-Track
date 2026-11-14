@@ -4,27 +4,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CareerTrack — Internship &amp; Job Tracker</title>
+    <title>CareerTrack — Internship & Job Application Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-    <nav class="topbar">
+    <header class="topbar">
         <div class="topbar-inner">
             <div class="logo">
                 <span class="logo-dot"></span>
                 <span>CareerTrack</span>
             </div>
             <div class="topbar-btns">
-                <button class="btn btn-secondary" onclick="exportToCSV()">Export CSV</button>
-                <button class="btn btn-primary" onclick="openModal()">+ New Application</button>
+                <button class="btn btn-secondary" id="exportBtn">Export CSV</button>
+                <button class="btn btn-primary" id="openModalBtn">+ New Application</button>
             </div>
         </div>
-    </nav>
+    </header>
 
     <main class="wrapper">
         <div class="header-block">
@@ -32,7 +32,7 @@
             <p>Organize internship applications, upcoming interview dates, and topic-wise revision in one place.</p>
         </div>
 
-        <!-- Upcoming Interview Alerts -->
+        <!-- Upcoming Alerts Strip -->
         <section class="alert-strip">
             <div class="alert-strip-head">
                 <span class="alert-heading">Upcoming Interviews</span>
@@ -43,61 +43,64 @@
                     <span class="tag-key"><i class="dot dot-green"></i>Within 3 Days</span>
                 </div>
             </div>
-            <div class="alert-list" id="reminderPills"></div>
+            <div class="alert-list" id="reminderList"></div>
         </section>
 
-        <!-- Summary Row -->
+        <!-- Summary Cards -->
         <section class="stats-row">
-            <div class="stat-box" onclick="quickFilterStage('All')">
+            <div class="stat-box">
                 <span class="stat-title">Total Saved</span>
-                <strong class="stat-num" id="statTotal">0</strong>
+                <span class="stat-num" id="statTotal">0</span>
                 <span class="stat-note">All tracked roles</span>
             </div>
-            <div class="stat-box" onclick="quickFilterStage('Applied')">
+            <div class="stat-box">
                 <span class="stat-title">In Progress</span>
-                <strong class="stat-num text-emerald" id="statActive">0</strong>
+                <span class="stat-num text-emerald" id="statActive">0</span>
                 <span class="stat-note">Applied &amp; interviewing</span>
             </div>
-            <div class="stat-box" onclick="quickFilterStage('Interviewing')">
+            <div class="stat-box">
                 <span class="stat-title">Interviews</span>
-                <strong class="stat-num text-amber" id="statInterviews">0</strong>
+                <span class="stat-num text-amber" id="statInterviews">0</span>
                 <span class="stat-note">Scheduled rounds</span>
             </div>
-            <div class="stat-box" onclick="quickFilterStage('Offer')">
+            <div class="stat-box">
                 <span class="stat-title">Offers</span>
-                <strong class="stat-num text-blue" id="statOffers">0</strong>
-                <span class="stat-note" id="statReadinessAvg">Prep Completed: 0%</span>
+                <span class="stat-num text-blue" id="statOffers">0</span>
+                <span class="stat-note" id="statOffersNote">0 received · 0 accepted</span>
             </div>
         </section>
 
-        <!-- Workspace Grid -->
+        <!-- Main Split Workspace -->
         <div class="workspace">
-            <!-- Left: Applications -->
+
+            <!-- Applications Panel -->
             <section class="panel">
                 <div class="panel-head">
                     <div class="panel-title-group">
                         <h2>Applications</h2>
-                        <span class="pill-count" id="recordCountLabel">0</span>
+                        <span class="pill-count" id="visibleCount">0</span>
                     </div>
                     <div class="segmented-control">
-                        <button class="seg-btn active" id="btnTableView" onclick="switchView('table')">List</button>
-                        <button class="seg-btn" id="btnKanbanView" onclick="switchView('kanban')">Board</button>
+                        <button class="seg-btn active" id="viewListBtn">List</button>
+                        <button class="seg-btn" id="viewBoardBtn">Board</button>
                     </div>
                 </div>
 
                 <div class="filter-bar">
-                    <input type="text" id="searchInput" class="input-search" placeholder="Search company, role, or notes..." oninput="renderAll()" />
-                    <select id="statusFilter" class="select-stage" onchange="renderAll()">
-            <option value="All">All Stages</option>
-            <option value="Wishlist">Wishlist</option>
-            <option value="Applied">Applied</option>
-            <option value="Interviewing">Interviewing</option>
-            <option value="Offer">Offer</option>
-            <option value="Rejected">Rejected</option>
-          </select>
+                    <input type="text" class="input-search" id="searchInput" placeholder="Search company, role, or notes..." />
+                    <select id="statusFilter">
+                        <option value="All">All Stages</option>
+                        <option value="Wishlist">Wishlist</option>
+                        <option value="Applied">Applied</option>
+                        <option value="Interviewing">Interviewing</option>
+                        <option value="Offer Received">Offer Received</option>
+                        <option value="Offer Accepted">Offer Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
                 </div>
 
-                <div class="table-container" id="tableViewContainer">
+                <!-- Table View -->
+                <div class="table-container" id="tableView">
                     <table>
                         <thead>
                             <tr>
@@ -108,88 +111,96 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="applicationsBody"></tbody>
+                        <tbody id="appTableBody"></tbody>
                     </table>
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        No matching applications found. Click "+ New Application" to add one.
+                    </div>
                 </div>
 
-                <div class="board-container" id="kanbanViewContainer"></div>
+                <!-- Board View -->
+                <div class="board-container" id="boardView"></div>
             </section>
 
-            <!-- Right: Prep Checklist -->
+            <!-- Prep Checklist Panel -->
             <aside class="panel">
                 <div class="panel-head">
-                    <h2>Topic Prep Checklist</h2>
+                    <div class="panel-title-group">
+                        <h2>Topic Prep Checklist</h2>
+                    </div>
                 </div>
                 <div class="prep-content">
                     <p class="prep-sub">Click a topic to check off completed milestones.</p>
-                    <div id="skillsList"></div>
+                    <div id="skillsContainer"></div>
 
-                    <form class="new-topic-form" onsubmit="addSkill(event)">
+                    <form class="new-topic-form" id="addSkillForm">
                         <input type="text" id="newSkillName" placeholder="New topic (e.g. React, Docker)..." required />
                         <button type="submit" class="btn btn-primary btn-compact">+ Add</button>
                     </form>
                 </div>
             </aside>
+
         </div>
     </main>
 
-    <!-- Toast Popup -->
-    <div class="toast" id="toastAlert">
+    <!-- Toast Notification -->
+    <div class="toast" id="reminderToast">
         <div class="toast-head">
             <span>Upcoming Interview</span>
-            <button class="toast-x" onclick="closeToast()">&times;</button>
+            <button class="toast-x" id="closeToastBtn">&times;</button>
         </div>
         <div class="toast-msg" id="toastBody"></div>
     </div>
 
-    <!-- Add/Edit Modal -->
-    <div class="overlay" id="opportunityModal">
+    <!-- Modal Dialog -->
+    <div class="overlay" id="modalBackdrop">
         <div class="dialog">
             <div class="dialog-head">
-                <h3 id="modalTitle">New Application</h3>
-                <button class="dialog-x" onclick="closeModal()">&times;</button>
+                <h3 id="modalTitle">Add New Application</h3>
+                <button class="dialog-x" id="closeModalBtn">&times;</button>
             </div>
-            <form id="opportunityForm" onsubmit="saveOpportunity(event)">
+            <form id="appForm">
                 <div class="dialog-body">
-                    <input type="hidden" id="editId" />
+                    <input type="hidden" id="appId" />
                     <div class="field">
-                        <label for="companyInput">Company *</label>
-                        <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, Amazon" autocomplete="off" required />
+                        <label for="companyInput">Company Name *</label>
+                        <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, Razorpay" required />
                     </div>
                     <div class="field">
-                        <label for="roleInput">Role *</label>
-                        <input type="text" id="roleInput" placeholder="e.g. SDE Intern, AI/ML Intern" autocomplete="off" required />
+                        <label for="roleInput">Position / Role *</label>
+                        <input type="text" id="roleInput" placeholder="e.g. SDE Intern, AI Engineer" required />
                     </div>
                     <div class="field-split">
                         <div class="field">
                             <label for="statusInput">Stage</label>
                             <select id="statusInput">
-                <option value="Wishlist">Wishlist</option>
-                <option value="Applied">Applied</option>
-                <option value="Interviewing">Interviewing</option>
-                <option value="Offer">Offer</option>
-                <option value="Rejected">Rejected</option>
-              </select>
+                                <option value="Wishlist">Wishlist</option>
+                                <option value="Applied" selected>Applied</option>
+                                <option value="Interviewing">Interviewing</option>
+                                <option value="Offer Received">Offer Received</option>
+                                <option value="Offer Accepted">Offer Accepted</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
                         </div>
                         <div class="field">
-                            <label for="reminderDateInput">Date (Interview Date)</label>
-                            <input type="date" id="reminderDateInput" />
+                            <label for="dateInput">Interview / Applied Date *</label>
+                            <input type="date" id="dateInput" required />
                         </div>
                     </div>
                     <div class="field">
-                        <label for="notesInput">Notes</label>
-                        <textarea id="notesInput" rows="3" placeholder="e.g. Focus on DSA trees &amp; Flask APIs..."></textarea>
+                        <label for="notesInput">Notes / Prep Details</label>
+                        <textarea id="notesInput" rows="3" placeholder="Referral contact, round details, or key revision topics..."></textarea>
                     </div>
                 </div>
                 <div class="dialog-foot">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+                    <button type="button" class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Entry</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
