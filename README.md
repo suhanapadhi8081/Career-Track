@@ -15,7 +15,7 @@ During placement and internship season, tracking applications across portals, no
 
 ## Built With
 - HTML5 & CSS3
-- Vanilla JavaScript (`localStorage` for client-side persistence)
+- JavaScript (`localStorage` for client-side persistence)
 
 ## Run Locally
 Download or clone the repository and open `index.html` in your browser—no setup or dependencies needed:
