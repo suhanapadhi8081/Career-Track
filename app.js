@@ -1,5 +1,5 @@
-const STORAGE_KEY = 'careertrack_apps_v3';
-const SKILLS_KEY = 'careertrack_skills_v3';
+const STORAGE_KEY = 'careertrack_apps_v5';
+const SKILLS_KEY = 'careertrack_skills_v5';
 
 function formatOffsetDate(daysOffset) {
     const dt = new Date();
@@ -30,11 +30,11 @@ const seedApplications = [
         role: 'SDE Intern',
         status: 'Offer Accepted',
         date: formatOffsetDate(-2),
-        notes: 'Offer letter accepted for summer internship.'
+        notes: 'Offer letter accepted for winter internship.'
     },
     {
         id: 'app-104',
-        company: 'Atlassian',
+        company: 'Infosys',
         role: 'Backend Intern',
         status: 'Offer Received',
         date: formatOffsetDate(-1),
