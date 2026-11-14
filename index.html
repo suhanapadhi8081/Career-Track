@@ -4,94 +4,91 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CareerTrack — Internship &amp; Job Application Tracker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>CareerTrack — Internship &amp; Job Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-    <!-- Top Navigation -->
-    <header class="topbar">
-        <div class="container topbar-inner">
-            <div class="brand">
-                <span class="brand-dot"></span>
-                <span class="brand-name">CareerTrack</span>
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <div class="logo">
+                <span class="logo-dot"></span>
+                <span>CareerTrack</span>
             </div>
-            <div class="topbar-actions">
-                <button id="exportCsvBtn" class="btn btn-outline" type="button">Export CSV</button>
-                <button id="openModalBtn" class="btn btn-primary" type="button">+ New Application</button>
+            <div class="topbar-btns">
+                <button class="btn btn-secondary" onclick="exportToCSV()">Export CSV</button>
+                <button class="btn btn-primary" onclick="openModal()">+ New Application</button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="container main-content">
-        <!-- Page Intro -->
-        <section class="page-header">
+    <main class="wrapper">
+        <div class="header-block">
             <h1>Application &amp; Interview Tracker</h1>
             <p>Organize internship applications, upcoming interview dates, and topic-wise revision in one place.</p>
-        </section>
+        </div>
 
-        <!-- Upcoming Interview Reminder Strip -->
-        <section id="reminderBanner" class="reminder-strip hidden" aria-live="polite">
-            <div class="reminder-header">
-                <span class="reminder-title">Upcoming Interviews (Next 3 Days)</span>
-                <div class="legend">
-                    <span><i class="dot dot-red"></i> Overdue</span>
-                    <span><i class="dot dot-amber"></i> Today</span>
-                    <span><i class="dot dot-yellow"></i> Tomorrow</span>
-                    <span><i class="dot dot-green"></i> Within 3 Days</span>
+        <!-- Upcoming Interview Alerts -->
+        <section class="alert-strip">
+            <div class="alert-strip-head">
+                <span class="alert-heading">Upcoming Interviews (Next 3 Days)</span>
+                <div class="alert-tags">
+                    <span class="tag-key"><i class="dot dot-red"></i>Overdue</span>
+                    <span class="tag-key"><i class="dot dot-orange"></i>Today</span>
+                    <span class="tag-key"><i class="dot dot-amber"></i>Tomorrow</span>
+                    <span class="tag-key"><i class="dot dot-green"></i>Within 3 Days</span>
                 </div>
             </div>
-            <div id="reminderList" class="reminder-chips"></div>
+            <div class="alert-list" id="reminderPills"></div>
         </section>
 
-        <!-- Summary Metrics -->
-        <section class="metrics-grid">
-            <div class="metric-card">
-                <span class="metric-label">Total Saved</span>
-                <strong id="statTotal" class="metric-value">0</strong>
-                <span class="metric-sub">All tracked roles</span>
+        <!-- Summary Row -->
+        <section class="stats-row">
+            <div class="stat-box" onclick="quickFilterStage('All')">
+                <span class="stat-title">Total Saved</span>
+                <strong class="stat-num" id="statTotal">0</strong>
+                <span class="stat-note">All tracked roles</span>
             </div>
-            <div class="metric-card">
-                <span class="metric-label">In Progress</span>
-                <strong id="statActive" class="metric-value text-green">0</strong>
-                <span class="metric-sub">Applied &amp; interviewing</span>
+            <div class="stat-box" onclick="quickFilterStage('Applied')">
+                <span class="stat-title">In Progress</span>
+                <strong class="stat-num text-emerald" id="statActive">0</strong>
+                <span class="stat-note">Applied &amp; interviewing</span>
             </div>
-            <div class="metric-card">
-                <span class="metric-label">Interviews</span>
-                <strong id="statInterviews" class="metric-value text-amber">0</strong>
-                <span class="metric-sub">Scheduled rounds</span>
+            <div class="stat-box" onclick="quickFilterStage('Interviewing')">
+                <span class="stat-title">Interviews</span>
+                <strong class="stat-num text-amber" id="statInterviews">0</strong>
+                <span class="stat-note">Scheduled rounds</span>
             </div>
-            <div class="metric-card">
-                <span class="metric-label">Offers</span>
-                <strong id="statOffers" class="metric-value text-blue">0</strong>
-                <span id="prepRateSub" class="metric-sub">Prep Completed: 0%</span>
+            <div class="stat-box" onclick="quickFilterStage('Offer')">
+                <span class="stat-title">Offers</span>
+                <strong class="stat-num text-blue" id="statOffers">0</strong>
+                <span class="stat-note" id="statReadinessAvg">Prep Completed: 0%</span>
             </div>
         </section>
 
-        <!-- Main Two-Column Workspace -->
-        <section class="workspace-grid">
-            <!-- Left: Applications Tracker -->
-            <div class="panel">
-                <div class="panel-header">
+        <!-- Workspace Grid -->
+        <div class="workspace">
+            <!-- Left: Applications -->
+            <section class="panel">
+                <div class="panel-head">
                     <div class="panel-title-group">
                         <h2>Applications</h2>
-                        <span id="appCountBadge" class="count-badge">0</span>
+                        <span class="pill-count" id="recordCountLabel">0</span>
                     </div>
-                    <div class="view-switcher" role="group" aria-label="View mode">
-                        <button id="tableViewBtn" class="switch-btn active" type="button">List</button>
-                        <button id="boardViewBtn" class="switch-btn" type="button">Board</button>
+                    <div class="segmented-control">
+                        <button class="seg-btn active" id="btnTableView" onclick="switchView('table')">List</button>
+                        <button class="seg-btn" id="btnKanbanView" onclick="switchView('kanban')">Board</button>
                     </div>
                 </div>
 
-                <!-- Filters -->
                 <div class="filter-bar">
-                    <input type="search" id="searchInput" class="input-control" placeholder="Search company, role, or notes..." aria-label="Search applications" />
-                    <select id="stageFilter" class="select-control" aria-label="Filter by stage">
-            <option value="ALL">All Stages</option>
+                    <input type="text" id="searchInput" class="input-search" placeholder="Search company, role, or notes..." oninput="renderAll()" />
+                    <select id="statusFilter" class="select-stage" onchange="renderAll()">
+            <option value="All">All Stages</option>
             <option value="Wishlist">Wishlist</option>
             <option value="Applied">Applied</option>
             <option value="Interviewing">Interviewing</option>
@@ -100,136 +97,96 @@
           </select>
                 </div>
 
-                <!-- List / Table View -->
-                <div id="tableView" class="table-wrapper">
-                    <table class="app-table">
+                <div class="table-container" id="tableViewContainer">
+                    <table>
                         <thead>
                             <tr>
-                                <th>Company &amp; Role</th>
+                                <th>Company</th>
+                                <th>Role</th>
+                                <th>Date</th>
                                 <th>Stage</th>
-                                <th>Interview / Deadline</th>
-                                <th>Notes</th>
-                                <th class="text-right">Actions</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="appTableBody"></tbody>
+                        <tbody id="applicationsBody"></tbody>
                     </table>
-                    <div id="emptyState" class="empty-state hidden">
-                        No matching applications found. Click <strong>+ New Application</strong> to add one.
-                    </div>
                 </div>
 
-                <!-- Kanban Board View -->
-                <div id="boardView" class="board-grid hidden">
-                    <div class="board-col" data-stage="Wishlist">
-                        <div class="board-col-head">
-                            <span>Wishlist</span>
-                            <span id="count-Wishlist" class="col-count">0</span>
-                        </div>
-                        <div id="col-Wishlist" class="board-cards"></div>
-                    </div>
+                <div class="board-container" id="kanbanViewContainer"></div>
+            </section>
 
-                    <div class="board-col" data-stage="Applied">
-                        <div class="board-col-head">
-                            <span>Applied</span>
-                            <span id="count-Applied" class="col-count">0</span>
-                        </div>
-                        <div id="col-Applied" class="board-cards"></div>
-                    </div>
-
-                    <div class="board-col" data-stage="Interviewing">
-                        <div class="board-col-head">
-                            <span>Interviewing</span>
-                            <span id="count-Interviewing" class="col-count">0</span>
-                        </div>
-                        <div id="col-Interviewing" class="board-cards"></div>
-                    </div>
-
-                    <div class="board-col" data-stage="Offer">
-                        <div class="board-col-head">
-                            <span>Offer</span>
-                            <span id="count-Offer" class="col-count">0</span>
-                        </div>
-                        <div id="col-Offer" class="board-cards"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Topic Prep Checklist -->
+            <!-- Right: Prep Checklist -->
             <aside class="panel">
-                <div class="panel-header">
+                <div class="panel-head">
                     <h2>Topic Prep Checklist</h2>
                 </div>
-                <p class="panel-desc">Click a topic to check off completed milestones.</p>
-                <div id="prepTopicsList" class="prep-list"></div>
+                <div class="prep-content">
+                    <p class="prep-sub">Click a topic to check off completed milestones.</p>
+                    <div id="skillsList"></div>
+
+                    <form class="new-topic-form" onsubmit="addSkill(event)">
+                        <input type="text" id="newSkillName" placeholder="New topic (e.g. React, Docker)..." required />
+                        <button type="submit" class="btn btn-primary btn-compact">+ Add</button>
+                    </form>
+                </div>
             </aside>
-        </section>
+        </div>
     </main>
 
-    <!-- Add / Edit Application Modal -->
-    <div id="appModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-box">
-            <div class="modal-header">
+    <!-- Toast Popup -->
+    <div class="toast" id="toastAlert">
+        <div class="toast-head">
+            <span>Upcoming Interview</span>
+            <button class="toast-x" onclick="closeToast()">&times;</button>
+        </div>
+        <div class="toast-msg" id="toastBody"></div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="overlay" id="opportunityModal">
+        <div class="dialog">
+            <div class="dialog-head">
                 <h3 id="modalTitle">New Application</h3>
-                <button id="closeModalBtn" class="icon-close" type="button" aria-label="Close modal">&times;</button>
+                <button class="dialog-x" onclick="closeModal()">&times;</button>
             </div>
-
-            <form id="appForm" class="modal-form">
-                <input type="hidden" id="editAppId" />
-
-                <div class="form-group">
-                    <label for="companyInput">Company *</label>
-                    <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, Amazon" autocomplete="off" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="roleInput">Role *</label>
-                    <input type="text" id="roleInput" placeholder="e.g. SDE Intern, AI/ML Intern" autocomplete="off" required />
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="stageInput">Stage</label>
-                        <select id="stageInput">
-              <option value="Wishlist">Wishlist</option>
-              <option value="Applied" selected>Applied</option>
-              <option value="Interviewing">Interviewing</option>
-              <option value="Offer">Offer</option>
-              <option value="Rejected">Rejected</option>
-            </select>
+            <form id="opportunityForm" onsubmit="saveOpportunity(event)">
+                <div class="dialog-body">
+                    <input type="hidden" id="editId" />
+                    <div class="field">
+                        <label for="companyInput">Company *</label>
+                        <input type="text" id="companyInput" placeholder="e.g. Google, Microsoft, Amazon" autocomplete="off" required />
                     </div>
-
-                    <div class="form-group">
-                        <label for="dateInput">Interview / Deadline</label>
-                        <input type="date" id="dateInput" />
+                    <div class="field">
+                        <label for="roleInput">Role *</label>
+                        <input type="text" id="roleInput" placeholder="e.g. SDE Intern, AI/ML Intern" autocomplete="off" required />
+                    </div>
+                    <div class="field-split">
+                        <div class="field">
+                            <label for="statusInput">Stage</label>
+                            <select id="statusInput">
+                <option value="Wishlist">Wishlist</option>
+                <option value="Applied">Applied</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+                        </div>
+                        <div class="field">
+                            <label for="reminderDateInput">Date (Interview Date)</label>
+                            <input type="date" id="reminderDateInput" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="notesInput">Notes</label>
+                        <textarea id="notesInput" rows="3" placeholder="e.g. Focus on DSA trees &amp; Flask APIs..."></textarea>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="linkInput">Application Link (Optional)</label>
-                    <input type="url" id="linkInput" placeholder="https://..." />
-                </div>
-
-                <div class="form-group">
-                    <label for="notesInput">Notes</label>
-                    <textarea id="notesInput" rows="3" placeholder="Referral contact, stipend, assessment details..."></textarea>
-                </div>
-
-                <div class="modal-footer">
-                    <button id="cancelModalBtn" class="btn btn-outline" type="button">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Save Entry</button>
+                <div class="dialog-foot">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
                 </div>
             </form>
         </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div id="toastAlert" class="toast hidden" role="status" aria-live="polite">
-        <div class="toast-head">
-            <strong>Upcoming Interview</strong>
-            <button id="closeToastBtn" class="icon-close" type="button" aria-label="Dismiss">&times;</button>
-        </div>
-        <ul id="toastList" class="toast-list"></ul>
     </div>
 
     <script src="app.js"></script>
