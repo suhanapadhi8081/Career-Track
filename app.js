@@ -1,5 +1,5 @@
-const STORAGE_KEY = 'careertrack_apps_v2';
-const SKILLS_KEY = 'careertrack_skills_v2';
+const STORAGE_KEY = 'careertrack_apps_v3';
+const SKILLS_KEY = 'careertrack_skills_v3';
 
 function formatOffsetDate(daysOffset) {
     const dt = new Date();
@@ -7,7 +7,8 @@ function formatOffsetDate(daysOffset) {
     return dt.toISOString().split('T')[0];
 }
 
-const seedApplications = [{
+const seedApplications = [
+    {
         id: 'app-101',
         company: 'Google',
         role: 'AI Software Intern',
@@ -41,7 +42,8 @@ const seedApplications = [{
     }
 ];
 
-const seedSkills = [{
+const seedSkills = [
+    {
         id: 'sk-1',
         name: 'Python & Core Programming',
         expanded: true,
@@ -87,12 +89,17 @@ const seedSkills = [{
     }
 ];
 
-let applications = JSON.parse(localStorage.getItem(STORAGE_KEY)) || seedApplications;
-let skills = JSON.parse(localStorage.getItem(SKILLS_KEY)) || seedSkills;
-let activeView = 'list';
+let applications = JSON.parse(localStorage.getItem(STORAGE_KEY));
+if (!Array.isArray(applications) || applications.length === 0) {
+    applications = seedApplications;
+}
 
-// Normalize legacy 'Offer' status if present in older localStorage data
-applications = applications.map(app => app.status === 'Offer' ? {...app, status: 'Offer Received' } : app);
+let skills = JSON.parse(localStorage.getItem(SKILLS_KEY));
+if (!Array.isArray(skills) || skills.length === 0) {
+    skills = seedSkills;
+}
+
+let activeView = 'list';
 
 function persistData() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
@@ -205,12 +212,12 @@ function renderApplications() {
     } else {
         emptyEl.style.display = 'none';
         tbody.innerHTML = filtered.map(app => {
-                    const alert = getDeadlineBadge(app);
-                    const alertHTML = alert ?
-                        `<span class="date-sub-badge" style="background:${alert.badgeBg};color:${alert.badgeColor}">${alert.label}</span>` :
-                        '';
+            const alert = getDeadlineBadge(app);
+            const alertHTML = alert ?
+                `<span class="date-sub-badge" style="background:${alert.badgeBg};color:${alert.badgeColor}">${alert.label}</span>` :
+                '';
 
-                    return `
+            return `
                 <tr>
                     <td>
                         <span class="company-name">${escapeHTML(app.company)}</span>
@@ -502,6 +509,7 @@ document.getElementById('viewBoardBtn').addEventListener('click', () => {
     document.getElementById('boardView').classList.add('active');
 });
 
+persistData();
 renderApplications();
 renderSkills();
 triggerInitialToast();
