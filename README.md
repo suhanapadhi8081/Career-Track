@@ -15,11 +15,9 @@ During placement and internship season, tracking applications across portals, no
 
 ## Built With
 - HTML5 & CSS3
-- JavaScript (`localStorage` for client-side persistence)
+- Vanilla JavaScript (`localStorage` for client-side persistence)
 
 ## Run Locally
-Clone the repo and open `index.html` in any browser—no build steps or dependencies needed:
+Download or clone the repository and open `index.html` in your browser—no setup or dependencies needed:
 
-```bash
-git clone [https://github.com/suhanapadhi8081/Career-Track.git](https://github.com/suhanapadhi8081/Career-Track.git)
-cd Career-Track
+    git clone https://github.com/suhanapadhi8081/Career-Track.git
