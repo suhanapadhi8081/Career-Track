@@ -86,8 +86,8 @@ body {
 }
 
 .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .btn:active {
@@ -156,7 +156,7 @@ body {
 
 .alert-strip:hover {
     border-color: var(--border-dark);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
 }
 
 .alert-strip-head {
@@ -226,8 +226,8 @@ body {
 }
 
 .reminder-pill:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .reminder-overdue {
@@ -275,13 +275,14 @@ body {
     border-radius: 10px;
     padding: 1.1rem 1.25rem;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .stat-box:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     border-color: var(--accent);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    background: var(--accent-bg);
+    box-shadow: 0 12px 24px rgba(21, 128, 61, 0.12);
 }
 
 .stat-title {
@@ -339,7 +340,7 @@ body {
 
 .panel:hover {
     border-color: var(--border-dark);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.035);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.07);
 }
 
 .panel-head {
@@ -627,9 +628,9 @@ tr:hover td {
 }
 
 .kanban-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--border-dark);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.09);
 }
 
 .kanban-card-title {
@@ -670,13 +671,14 @@ tr:hover td {
     border-radius: 8px;
     padding: 0.75rem 0.9rem;
     margin-bottom: 0.7rem;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .skill-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--border-dark);
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.04);
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07);
 }
 
 .skill-top {
