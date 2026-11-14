@@ -1,5 +1,5 @@
-const STORAGE_KEY = 'careertrack_apps_v5';
-const SKILLS_KEY = 'careertrack_skills_v5';
+const STORAGE_KEY = 'careertrack_apps_v6';
+const SKILLS_KEY = 'careertrack_skills_v6';
 
 function formatOffsetDate(daysOffset) {
     const dt = new Date();
@@ -10,35 +10,43 @@ function formatOffsetDate(daysOffset) {
 const seedApplications = [
     {
         id: 'app-101',
-        company: 'Google',
-        role: 'AI Software Intern',
-        status: 'Interviewing',
-        date: formatOffsetDate(1),
-        notes: 'Final DSA & ML fundamentals revision with system design basics.'
+        company: 'Wipro',
+        role: 'Full Stack Developer',
+        status: 'Wishlist',
+        date: formatOffsetDate(0),
+        notes: 'Interested in this opportunity. Reviewing job requirements & preparing for the application process.'
     },
     {
         id: 'app-102',
-        company: 'Microsoft',
-        role: 'Explore SWE Intern',
-        status: 'Applied',
-        date: formatOffsetDate(0),
-        notes: 'Application submitted via careers portal with employee referral.'
+        company: 'Google',
+        role: 'Data Analyst',
+        status: 'Interviewing',
+        date: formatOffsetDate(1),
+        notes: 'Completed SQL, Python & Excel analysis, currently preparing Power BI dashboards & practising real-world data interpretation.'
     },
     {
         id: 'app-103',
-        company: 'Amazon',
-        role: 'SDE Intern',
-        status: 'Offer Accepted',
-        date: formatOffsetDate(-2),
-        notes: 'Offer letter accepted for winter internship.'
+        company: 'Microsoft',
+        role: 'SWE Intern',
+        status: 'Offer Received',
+        date: formatOffsetDate(-4),
+        notes: 'Received a offer letter for SWE Intern position.'
     },
     {
         id: 'app-104',
+        company: 'Microsoft',
+        role: 'SWE Intern',
+        status: 'Offer Accepted',
+        date: formatOffsetDate(-3),
+        notes: 'I accepted the offer letter for winter internship.'
+    },
+    {
+        id: 'app-105',
         company: 'Infosys',
-        role: 'Backend Intern',
-        status: 'Offer Received',
-        date: formatOffsetDate(-1),
-        notes: 'Offer letter received; reviewing compensation and team details.'
+        role: 'Backend Developer',
+        status: 'Applied',
+        date: formatOffsetDate(-2),
+        notes: 'Preparing for backend development with a focus on Python, Flask, SQL, Database Management & Problem Solving.'
     }
 ];
 
@@ -119,11 +127,25 @@ function formatStatusClass(status) {
     return 'status-' + status.replace(/\s+/g, '-');
 }
 
-function getDeadlineBadge(app) {
-    if (app.status === 'Rejected' || app.status === 'Offer Received' || app.status === 'Offer Accepted') return null;
+function updateDateLabel(stage) {
+    const label = document.getElementById('dateLabel');
+    const labels = {
+        'Wishlist': 'Application Deadline *',
+        'Applied': 'Applied Date *',
+        'Interviewing': 'Interview Date *',
+        'Offer Received': 'Offer Date *',
+        'Offer Accepted': 'Offer Date *',
+        'Rejected': 'Date *'
+    };
+    label.textContent = labels[stage] || 'Date *';
+}
+
+// Interview alerts & toast apply ONLY to 'Interviewing' stage
+function getInterviewAlertBadge(app) {
+    if (app.status !== 'Interviewing') return null;
     const diff = getDaysDiff(app.date);
 
-    if (diff < 0 && app.status === 'Interviewing') {
+    if (diff < 0) {
         return { label: `Overdue (${Math.abs(diff)}d ago)`, pillClass: 'reminder-overdue', badgeBg: '#fef2f2', badgeColor: '#991b1b' };
     }
     if (diff === 0) {
@@ -141,7 +163,7 @@ function getDeadlineBadge(app) {
 function renderReminders() {
     const container = document.getElementById('reminderList');
     const upcoming = applications
-        .map(app => ({ app, info: getDeadlineBadge(app) }))
+        .map(app => ({ app, info: getInterviewAlertBadge(app) }))
         .filter(item => item.info !== null)
         .sort((a, b) => getDaysDiff(a.app.date) - getDaysDiff(b.app.date));
 
@@ -157,20 +179,24 @@ function renderReminders() {
     `).join('');
 }
 
-function triggerInitialToast() {
+function syncToastNotification() {
+    const toast = document.getElementById('reminderToast');
+    const body = document.getElementById('toastBody');
+
     const urgent = applications.filter(app => {
+        if (app.status !== 'Interviewing') return false;
         const diff = getDaysDiff(app.date);
-        return (app.status !== 'Rejected' && app.status !== 'Offer Received' && app.status !== 'Offer Accepted') && (diff === 0 || diff === 1);
+        return diff === 0 || diff === 1;
     });
 
     if (urgent.length > 0) {
-        const toast = document.getElementById('reminderToast');
-        const body = document.getElementById('toastBody');
         body.innerHTML = urgent.map(a => {
             const when = getDaysDiff(a.date) === 0 ? 'Today' : 'Tomorrow';
             return `• <strong>${escapeHTML(a.company)}</strong> (${when})`;
         }).join('<br>');
         toast.classList.add('show');
+    } else {
+        toast.classList.remove('show');
     }
 }
 
@@ -212,10 +238,13 @@ function renderApplications() {
     } else {
         emptyEl.style.display = 'none';
         tbody.innerHTML = filtered.map(app => {
-            const alert = getDeadlineBadge(app);
-            const alertHTML = alert ?
-                `<span class="date-sub-badge" style="background:${alert.badgeBg};color:${alert.badgeColor}">${alert.label}</span>` :
-                '';
+            const alert = getInterviewAlertBadge(app);
+            let subBadgeHTML = '';
+            if (alert) {
+                subBadgeHTML = `<span class="date-sub-badge" style="background:${alert.badgeBg};color:${alert.badgeColor}">${alert.label}</span>`;
+            } else if (app.status === 'Wishlist') {
+                subBadgeHTML = `<span class="date-sub-badge" style="background:#f4f4f5;color:#52525b">Deadline</span>`;
+            }
 
             return `
                 <tr>
@@ -226,7 +255,7 @@ function renderApplications() {
                     <td class="role-text">${escapeHTML(app.role)}</td>
                     <td>
                         <span class="date-tag">${app.date}</span>
-                        ${alertHTML}
+                        ${subBadgeHTML}
                     </td>
                     <td><span class="badge ${formatStatusClass(app.status)}">${app.status}</span></td>
                     <td>
@@ -243,6 +272,7 @@ function renderApplications() {
     renderBoardView(filtered);
     updateSummaryStats();
     renderReminders();
+    syncToastNotification();
 }
 
 function renderBoardView(list) {
@@ -263,7 +293,7 @@ function renderBoardView(list) {
                     <span>${colItems.length}</span>
                 </div>
                 ${colItems.length === 0 ? `<div class="kanban-empty">Empty</div>` : colItems.map(item => {
-                    const alert = getDeadlineBadge(item);
+                    const alert = getInterviewAlertBadge(item);
                     const offerTag = (item.status === 'Offer Received' || item.status === 'Offer Accepted')
                         ? `<span class="badge ${formatStatusClass(item.status)}" style="margin-top:4px">${item.status}</span>`
                         : '';
@@ -382,12 +412,18 @@ window.deleteSkill = function(skillId) {
 
 const backdrop = document.getElementById('modalBackdrop');
 const appForm = document.getElementById('appForm');
+const statusSelect = document.getElementById('statusInput');
+
+statusSelect.addEventListener('change', () => {
+    updateDateLabel(statusSelect.value);
+});
 
 function openCreateModal() {
     appForm.reset();
     document.getElementById('appId').value = '';
     document.getElementById('modalTitle').textContent = 'Add New Application';
     document.getElementById('dateInput').valueAsDate = new Date();
+    updateDateLabel(statusSelect.value);
     backdrop.classList.add('open');
 }
 
@@ -402,6 +438,7 @@ window.openEditModal = function(id) {
     document.getElementById('dateInput').value = app.date;
     document.getElementById('notesInput').value = app.notes || '';
     document.getElementById('modalTitle').textContent = 'Edit Application';
+    updateDateLabel(app.status);
     backdrop.classList.add('open');
 };
 
@@ -512,4 +549,3 @@ document.getElementById('viewBoardBtn').addEventListener('click', () => {
 persistData();
 renderApplications();
 renderSkills();
-triggerInitialToast();
