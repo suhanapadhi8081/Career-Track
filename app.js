@@ -7,8 +7,7 @@ function formatOffsetDate(daysOffset) {
     return dt.toISOString().split('T')[0];
 }
 
-const seedApplications = [
-    {
+const seedApplications = [{
         id: 'app-101',
         company: 'Wipro',
         role: 'Full Stack Developer',
@@ -50,8 +49,7 @@ const seedApplications = [
     }
 ];
 
-const seedSkills = [
-    {
+const seedSkills = [{
         id: 'sk-1',
         name: 'Python & Core Programming',
         expanded: true,
@@ -238,15 +236,15 @@ function renderApplications() {
     } else {
         emptyEl.style.display = 'none';
         tbody.innerHTML = filtered.map(app => {
-            const alert = getInterviewAlertBadge(app);
-            let subBadgeHTML = '';
-            if (alert) {
-                subBadgeHTML = `<span class="date-sub-badge" style="background:${alert.badgeBg};color:${alert.badgeColor}">${alert.label}</span>`;
-            } else if (app.status === 'Wishlist') {
-                subBadgeHTML = `<span class="date-sub-badge" style="background:#f4f4f5;color:#52525b">Deadline</span>`;
-            }
+                    const alert = getInterviewAlertBadge(app);
+                    let subBadgeHTML = '';
+                    if (alert) {
+                        subBadgeHTML = `<span class="date-sub-badge" style="background:${alert.badgeBg};color:${alert.badgeColor}">${alert.label}</span>`;
+                    } else if (app.status === 'Wishlist') {
+                        subBadgeHTML = `<span class="date-sub-badge" style="background:#f4f4f5;color:#52525b">Deadline</span>`;
+                    }
 
-            return `
+                    return `
                 <tr>
                     <td>
                         <span class="company-name">${escapeHTML(app.company)}</span>
