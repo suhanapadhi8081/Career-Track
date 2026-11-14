@@ -506,6 +506,7 @@ tr:hover td {
     border-radius: 5px;
     font-size: 0.72rem;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .status-Wishlist {
@@ -523,7 +524,12 @@ tr:hover td {
     color: #92400e;
 }
 
-.status-Offer {
+.status-Offer-Received {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status-Offer-Accepted {
     background: #dcfce7;
     color: #166534;
 }
